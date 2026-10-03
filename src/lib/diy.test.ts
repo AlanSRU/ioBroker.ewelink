@@ -1,7 +1,11 @@
 import { expect } from 'chai';
 import * as http from 'node:http';
 import type { AddressInfo } from 'node:net';
-import { DiyError, diyRequest, parseReply, toInfo, type DiyTarget } from './diy';
+import { DiyError, decrypt, diyRequest, encrypt, parseReply, toInfo, type DiyTarget } from './diy';
+
+// test vectors made with openssl enc -aes-128-cbc, key = MD5(KEY), iv = 00 01 .. 0f
+const KEY = 'a1b2c3d4-e5f6-7890-abcd-ef1234567890';
+const IV = 'AAECAwQFBgcICQoLDA0ODw==';
 
 describe('parseReply', () => {
     it('returns the data object of a v2 reply', () => {
@@ -27,6 +31,44 @@ describe('parseReply', () => {
         expect(() => parseReply('[1]')).to.throw('JSON object');
         expect(() => parseReply('{"error":0,"data":"{broken"}')).to.throw('malformed');
         expect(() => parseReply('{"error":0,"data":[1]}')).to.throw('malformed');
+    });
+});
+
+describe('encrypt / decrypt', () => {
+    it('decrypts data encrypted by openssl', () => {
+        expect(decrypt('QGlQlzekK+t5KWyCuciaJg==', IV, KEY)).to.equal('{"switch":"on"}');
+    });
+
+    it('strips the 0x02 padding some firmware leaves after the JSON', () => {
+        const data = 'MYFRhBcV3cPGENek/6wUal/TcSkYLUytPb4tmtJ9reBG2uQhh3euiQ+gTPudM+15';
+        expect(decrypt(data, IV, KEY)).to.equal('{"switch":"off","startup":"stay"}');
+    });
+
+    it('round-trips with a fresh IV each time', () => {
+        const a = encrypt({ switch: 'on' }, KEY);
+        const b = encrypt({ switch: 'on' }, KEY);
+        expect(a.iv).to.not.equal(b.iv);
+        expect(JSON.parse(decrypt(a.data, a.iv, KEY))).to.deep.equal({ switch: 'on' });
+    });
+
+    it('reports a wrong key', () => {
+        expect(() => decrypt('QGlQlzekK+t5KWyCuciaJg==', IV, 'wrong')).to.throw('device key');
+    });
+});
+
+describe('parseReply with encrypted data', () => {
+    it('decrypts the data of an encrypted reply', () => {
+        const reply = JSON.stringify({ seq: 5, error: 0, encrypt: true, iv: IV, data: 'QGlQlzekK+t5KWyCuciaJg==' });
+        expect(parseReply(reply, KEY)).to.deep.equal({ switch: 'on' });
+    });
+
+    it('asks for a device key when there is none', () => {
+        const reply = JSON.stringify({ seq: 5, error: 0, iv: IV, data: 'QGlQlzekK+t5KWyCuciaJg==' });
+        expect(() => parseReply(reply)).to.throw('no device key');
+    });
+
+    it('accepts an encrypted command reply without data', () => {
+        expect(parseReply('{"seq":6,"sequence":"1","error":0}', KEY)).to.deep.equal({});
     });
 });
 
@@ -85,6 +127,18 @@ describe('diyRequest', () => {
             method: 'POST',
             body: { deviceid: '1000abcdef', data: { switch: 'on' } },
         });
+    });
+
+    it('sends an encrypted command when the device has a key', async () => {
+        let body: Record<string, unknown> = {};
+        handler = (_req, text, res) => {
+            body = JSON.parse(text);
+            res.end(JSON.stringify({ seq: 2, sequence: body.sequence, error: 0 }));
+        };
+        await diyRequest({ ...target, deviceKey: KEY }, 'switch', { switch: 'off' });
+        expect(body).to.include({ deviceid: '1000abcdef', selfApikey: '123', encrypt: true });
+        expect(body.sequence).to.match(/^\d+$/);
+        expect(JSON.parse(decrypt(body.data as string, body.iv as string, KEY))).to.deep.equal({ switch: 'off' });
     });
 
     it('rejects with the DIY error code', async () => {

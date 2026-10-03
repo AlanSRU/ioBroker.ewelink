@@ -1,11 +1,21 @@
 {
     "Active": "Aktywny",
-    "Device ID (optional)": "Identyfikator urządzenia (opcjonalnie)",
+    "Address after sign-in": "Adres po zalogowaniu",
+    "App ID": "Identyfikator aplikacji",
+    "App Secret": "Sekret aplikacji",
+    "Device ID": "Identyfikator urządzenia",
     "Devices": "Urządzenia",
-    "IP address or host name": "Adres IP lub nazwa hosta",
+    "Fetch devices": "Pobierz urządzenia",
+    "IP address (optional)": "Adres IP (opcjonalnie)",
     "Name": "Nazwa",
     "Poll interval (s)": "Interwał odpytywania (s)",
     "Port": "Port",
-    "devicesHint": "Jeden rząd na przełącznik Sonoff w trybie DIY. Nazwa staje się folderem drzewa obiektów (ewelink.0.<nazwa>.control.power); pozostaw to pole puste, aby użyć adresu IP. Nadaj każdemu urządzeniu stały adres IP w routerze. Identyfikator urządzenia jest potrzebny tylko wtedy, gdy urządzenie bez niego odrzuca żądania.",
-    "pollIntervalHelp": "Jak często każde urządzenie jest pytane o stan przełączenia (5–3600 s)"
+    "Redirect URL": "Adres URL przekierowania",
+    "Sign in with eWeLink": "Zaloguj się za pomocą eWeLink",
+    "accountHint": "Przełączniki w normalnym trybie sterowania eWeLink LAN wymagają klucza urządzenia, który zna tylko chmura eWeLink. Aby jednorazowo pobrać klucze: utwórz aplikację w centrum programistów eWeLink (dev.ewelink.cc), korzystając z poniższego adresu URL przekierowania, wprowadź identyfikator aplikacji i sekret aplikacji, kliknij „Zaloguj się za pomocą eWeLink” i zaloguj się na swoje konto eWeLink. Następnie przeglądarka otworzy adres URL przekierowania, który może wyświetlić stronę błędu: skopiuj cały adres z paska adresu do pola poniżej i w ciągu kilku minut kliknij „Pobierz urządzenia”. Adapter steruje przełącznikami wyłącznie w sieci lokalnej; nie pozostaje połączony z chmurą.",
+    "devicesHint": "Jeden rząd na każdy przełącznik Sonoff. Nazwa staje się folderem drzewa obiektów (ewelink.0.<nazwa>.control.power). Urządzenia pobrane z Twojego konta eWeLink potrzebują jedynie swojego identyfikatora urządzenia: ich adres IP jest pobierany z ogłoszeń sieciowych, a ich klucz jest przechowywany w postaci zaszyfrowanej. W przypadku przełącznika w trybie DIY wprowadź jego adres IP; jego identyfikator urządzenia jest opcjonalny.",
+    "eWeLink account": "konto eWeLink",
+    "pollIntervalHelp": "Jak często każde urządzenie jest pytane o stan przełączenia (5–3600 s)",
+    "redirectUrlHelp": "Musi to być dokładnie adres URL przekierowania zarejestrowany dla aplikacji",
+    "signInAddressHelp": "Pełny adres, jaki przeglądarka wyświetla po zalogowaniu, zawierający kod= i region="
 }

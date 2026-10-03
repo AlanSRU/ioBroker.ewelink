@@ -1,11 +1,21 @@
 {
     "Active": "Actif",
-    "Device ID (optional)": "ID de l'appareil (facultatif)",
+    "Address after sign-in": "Adresse après la connexion",
+    "App ID": "Identifiant de l'application",
+    "App Secret": "Secret d'application",
+    "Device ID": "ID de l'appareil",
     "Devices": "Appareils",
-    "IP address or host name": "Adresse IP ou nom d'hôte",
+    "Fetch devices": "Récupérer des appareils",
+    "IP address (optional)": "Adresse IP (facultatif)",
     "Name": "Nom",
     "Poll interval (s)": "Intervalle(s) d'interrogation",
     "Port": "Port",
-    "devicesHint": "Une rangée par interrupteur Sonoff en mode DIY. Le nom devient le dossier de l'arborescence des objets (ewelink.0.<name>.control.power) ; laissez-le vide pour utiliser l'adresse IP. Donnez à chaque appareil une adresse IP fixe dans votre routeur. L'ID de l'appareil n'est nécessaire que si un appareil rejette les demandes sans lui.",
-    "pollIntervalHelp": "À quelle fréquence chaque appareil est demandé son état de commutation (5-3600 s)"
+    "Redirect URL": "URL de redirection",
+    "Sign in with eWeLink": "Connectez-vous avec eWeLink",
+    "accountHint": "Les commutateurs en mode de contrôle normal eWeLink LAN nécessitent une clé de périphérique, que seul le cloud eWeLink connaît. Pour récupérer les clés une fois : créez une application dans le centre de développement eWeLink (dev.ewelink.cc) avec l'URL de redirection ci-dessous, entrez son ID d'application et son secret d'application, cliquez sur \"Se connecter avec eWeLink\" et connectez-vous avec votre compte eWeLink. Le navigateur ouvre alors l'URL de redirection, qui peut afficher une page d'erreur : copiez l'adresse complète de la barre d'adresse dans le champ ci-dessous et cliquez sur « Récupérer les appareils » dans quelques minutes. L'adaptateur contrôle les commutateurs sur le réseau local uniquement ; il ne reste pas connecté au cloud.",
+    "devicesHint": "Une rangée par interrupteur Sonoff. Le nom devient le dossier de l'arborescence des objets (ewelink.0.<name>.control.power). Les appareils récupérés depuis votre compte eWeLink n'ont besoin que de leur identifiant d'appareil : leur adresse IP est apprise à partir de leurs annonces réseau et leur clé est stockée cryptée. Pour un switch en mode DIY, saisissez son adresse IP ; son identifiant d'appareil est facultatif.",
+    "eWeLink account": "Compte eWeLink",
+    "pollIntervalHelp": "À quelle fréquence chaque appareil est demandé son état de commutation (5-3600 s)",
+    "redirectUrlHelp": "Doit être exactement l'URL de redirection enregistrée pour l'application",
+    "signInAddressHelp": "L'adresse complète affichée par le navigateur après la connexion, contenant code= et region="
 }

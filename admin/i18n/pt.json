@@ -1,11 +1,21 @@
 {
     "Active": "Ativo",
-    "Device ID (optional)": "ID do dispositivo (opcional)",
+    "Address after sign-in": "Endereço após login",
+    "App ID": "ID do aplicativo",
+    "App Secret": "Segredo do aplicativo",
+    "Device ID": "ID do dispositivo",
     "Devices": "Dispositivos",
-    "IP address or host name": "Endereço IP ou nome do host",
+    "Fetch devices": "Buscar dispositivos",
+    "IP address (optional)": "Endereço IP (opcional)",
     "Name": "Nome",
     "Poll interval (s)": "Intervalo(s) de pesquisa",
     "Port": "Porta",
-    "devicesHint": "Uma linha por switch Sonoff no modo DIY. O nome se torna a pasta da árvore de objetos (ewelink.0.<nome>.control.power); deixe em branco para usar o endereço IP. Dê a cada dispositivo um endereço IP fixo em seu roteador. O ID do dispositivo só será necessário se um dispositivo rejeitar solicitações sem ele.",
-    "pollIntervalHelp": "Com que frequência cada dispositivo é questionado sobre seu estado de comutação (5-3600 s)"
+    "Redirect URL": "URL de redirecionamento",
+    "Sign in with eWeLink": "Faça login com eWeLink",
+    "accountHint": "Os switches no modo de controle normal da LAN eWeLink precisam de uma chave de dispositivo, que somente a nuvem eWeLink conhece. Para buscar as chaves uma vez: crie um aplicativo no centro de desenvolvedores eWeLink (dev.ewelink.cc) com o URL de redirecionamento abaixo, insira seu ID de aplicativo e segredo de aplicativo, clique em \"Entrar com eWeLink\" e faça login com sua conta eWeLink. O navegador então abre o URL de redirecionamento, que pode mostrar uma página de erro: copie o endereço completo da barra de endereço no campo abaixo e clique em “Buscar dispositivos” dentro de alguns minutos. O adaptador controla os switches somente pela rede local; ele não permanece conectado à nuvem.",
+    "devicesHint": "Uma linha por switch Sonoff. O nome se torna a pasta da árvore de objetos (ewelink.0.<nome>.control.power). Os dispositivos obtidos da sua conta eWeLink precisam apenas do ID do dispositivo: o endereço IP é obtido a partir dos anúncios da rede e a chave é armazenada criptografada. Para um switch no modo DIY, insira seu endereço IP; seu ID de dispositivo é opcional.",
+    "eWeLink account": "Conta eWeLink",
+    "pollIntervalHelp": "Com que frequência cada dispositivo é questionado sobre seu estado de comutação (5-3600 s)",
+    "redirectUrlHelp": "Deve ser exatamente o URL de redirecionamento registrado para o aplicativo",
+    "signInAddressHelp": "O endereço completo que o navegador mostra após o login, contendo code= e região="
 }

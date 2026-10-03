@@ -30,16 +30,19 @@ var diy_exports = {};
 __export(diy_exports, {
   DIY_PORT: () => DIY_PORT,
   DiyError: () => DiyError,
+  decrypt: () => decrypt,
   diyRequest: () => diyRequest,
+  encrypt: () => encrypt,
   parseReply: () => parseReply,
   toInfo: () => toInfo
 });
 module.exports = __toCommonJS(diy_exports);
+var crypto = __toESM(require("node:crypto"));
 var http = __toESM(require("node:http"));
 const DIY_PORT = 8081;
 const ERROR_TEXT = {
   400: "the device rejected the request format",
-  401: "unauthorized \u2014 is the device really in DIY mode (not encrypted LAN mode)?",
+  401: "unauthorized \u2014 the device key is wrong, or the device needs one (fetch the devices from eWeLink)",
   404: "device ID not recognised \u2014 check the device ID in the settings or leave it empty",
   422: "the device rejected the request parameters"
 };
@@ -55,7 +58,15 @@ class DiyError extends Error {
   }
 }
 function diyRequest(target, command, data = {}) {
-  const body = JSON.stringify({ deviceid: target.deviceId, data });
+  const body = JSON.stringify(
+    target.deviceKey ? {
+      sequence: String(Date.now()),
+      deviceid: target.deviceId,
+      selfApikey: "123",
+      encrypt: true,
+      ...encrypt(data, target.deviceKey)
+    } : { deviceid: target.deviceId, data }
+  );
   return new Promise((resolve, reject) => {
     var _a;
     const req = http.request(
@@ -81,7 +92,7 @@ function diyRequest(target, command, data = {}) {
             return;
           }
           try {
-            resolve(parseReply(Buffer.concat(chunks).toString("utf8")));
+            resolve(parseReply(Buffer.concat(chunks).toString("utf8"), target.deviceKey));
           } catch (error) {
             reject(error instanceof Error ? error : new Error(String(error)));
           }
@@ -94,7 +105,7 @@ function diyRequest(target, command, data = {}) {
     req.end(body);
   });
 }
-function parseReply(text) {
+function parseReply(text, deviceKey) {
   var _a, _b;
   let reply;
   try {
@@ -110,6 +121,12 @@ function parseReply(text) {
     throw new DiyError(code);
   }
   let data = (_b = reply.data) != null ? _b : {};
+  if (typeof data === "string" && typeof reply.iv === "string" && data) {
+    if (!deviceKey) {
+      throw new Error("the device sent encrypted data, but no device key is configured");
+    }
+    data = decrypt(data, reply.iv, deviceKey);
+  }
   if (typeof data === "string") {
     try {
       data = data ? JSON.parse(data) : {};
@@ -138,6 +155,28 @@ function toInfo(data) {
   }
   return info;
 }
+function encrypt(data, deviceKey) {
+  const iv = crypto.randomBytes(16);
+  const cipher = crypto.createCipheriv("aes-128-cbc", aesKey(deviceKey), iv);
+  const encrypted = Buffer.concat([cipher.update(JSON.stringify(data), "utf8"), cipher.final()]);
+  return { iv: iv.toString("base64"), data: encrypted.toString("base64") };
+}
+function decrypt(data, iv, deviceKey) {
+  try {
+    const decipher = crypto.createDecipheriv("aes-128-cbc", aesKey(deviceKey), Buffer.from(iv, "base64"));
+    const text = Buffer.concat([decipher.update(Buffer.from(data, "base64")), decipher.final()]).toString("utf8");
+    let end = text.length;
+    while (end > 0 && text.charCodeAt(end - 1) === 2) {
+      end--;
+    }
+    return text.substring(0, end);
+  } catch {
+    throw new Error("cannot decrypt the device data \u2014 is the device key right?");
+  }
+}
+function aesKey(deviceKey) {
+  return crypto.createHash("md5").update(deviceKey, "utf8").digest();
+}
 function isObject(value) {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
@@ -145,7 +184,9 @@ function isObject(value) {
 0 && (module.exports = {
   DIY_PORT,
   DiyError,
+  decrypt,
   diyRequest,
+  encrypt,
   parseReply,
   toInfo
 });

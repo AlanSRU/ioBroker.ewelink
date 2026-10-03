@@ -1,11 +1,21 @@
 {
     "Active": "Aktiv",
-    "Device ID (optional)": "Geräte-ID (optional)",
+    "Address after sign-in": "Adresse nach der Anmeldung",
+    "App ID": "App-ID",
+    "App Secret": "App-Geheimnis",
+    "Device ID": "Geräte-ID",
     "Devices": "Geräte",
-    "IP address or host name": "IP-Adresse oder Hostname",
+    "Fetch devices": "Geräte abrufen",
+    "IP address (optional)": "IP-Adresse (optional)",
     "Name": "Name",
     "Poll interval (s)": "Abfrageintervall (s)",
     "Port": "Port",
-    "devicesHint": "Eine Reihe pro Sonoff-Schalter im DIY-Modus. Der Name wird zum Objektbaumordner (ewelink.0.<name>.control.power); Lassen Sie das Feld leer, um die IP-Adresse zu verwenden. Geben Sie jedem Gerät eine feste IP-Adresse in Ihrem Router. Die Geräte-ID wird nur benötigt, wenn ein Gerät Anfragen ohne sie ablehnt.",
-    "pollIntervalHelp": "Wie oft wird jedes Gerät nach seinem Schaltzustand gefragt (5-3600 s)"
+    "Redirect URL": "Weiterleitungs-URL",
+    "Sign in with eWeLink": "Melden Sie sich mit eWeLink an",
+    "accountHint": "Switches im normalen eWeLink LAN-Steuerungsmodus benötigen einen Geräteschlüssel, den nur die eWeLink-Cloud kennt. Um die Schlüssel einmal abzurufen: Erstellen Sie eine App im eWeLink-Entwicklerzentrum (dev.ewelink.cc) mit der Weiterleitungs-URL unten, geben Sie deren App-ID und App-Geheimnis ein, klicken Sie auf „Mit eWeLink anmelden“ und melden Sie sich mit Ihrem eWeLink-Konto an. Der Browser öffnet dann die Weiterleitungs-URL, die möglicherweise eine Fehlerseite anzeigt: Kopieren Sie die vollständige Adresse aus der Adressleiste in das Feld darunter und klicken Sie innerhalb weniger Minuten auf „Geräte abrufen“. Der Adapter steuert die Switches nur über das lokale Netzwerk; Es bleibt nicht mit der Cloud verbunden.",
+    "devicesHint": "Eine Reihe pro Sonoff-Schalter. Der Name wird zum Objektbaumordner (ewelink.0.<name>.control.power). Geräte, die von Ihrem eWeLink-Konto abgerufen werden, benötigen nur ihre Geräte-ID: Ihre IP-Adresse wird aus ihren Netzwerkankündigungen ermittelt und ihr Schlüssel wird verschlüsselt gespeichert. Geben Sie für einen Switch im DIY-Modus seine IP-Adresse ein; seine Geräte-ID ist optional.",
+    "eWeLink account": "eWeLink-Konto",
+    "pollIntervalHelp": "Wie oft wird jedes Gerät nach seinem Schaltzustand gefragt (5-3600 s)",
+    "redirectUrlHelp": "Muss genau die Weiterleitungs-URL sein, die für die App registriert ist",
+    "signInAddressHelp": "Die vollständige Adresse, die der Browser nach der Anmeldung anzeigt, einschließlich code= und region="
 }

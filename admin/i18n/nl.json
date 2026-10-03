@@ -1,11 +1,21 @@
 {
     "Active": "Actief",
-    "Device ID (optional)": "Apparaat-ID (optioneel)",
+    "Address after sign-in": "Adres na inloggen",
+    "App ID": "App-ID",
+    "App Secret": "App-geheim",
+    "Device ID": "Apparaat-ID",
     "Devices": "Apparaten",
-    "IP address or host name": "IP-adres of hostnaam",
+    "Fetch devices": "Apparaten ophalen",
+    "IP address (optional)": "IP-adres (optioneel)",
     "Name": "Naam",
     "Poll interval (s)": "Poll-interval (s)",
     "Port": "Poort",
-    "devicesHint": "Eén rij per Sonoff-schakelaar in doe-het-zelf-modus. De naam wordt de objectboommap (ewelink.0.<naam>.control.power); laat het leeg om het IP-adres te gebruiken. Geef elk apparaat een vast IP-adres in uw router. De apparaat-ID is alleen nodig als een apparaat verzoeken zonder deze ID afwijst.",
-    "pollIntervalHelp": "Hoe vaak elk apparaat wordt gevraagd naar zijn schakelstatus (5-3600 s)"
+    "Redirect URL": "Omleidings-URL",
+    "Sign in with eWeLink": "Meld u aan met eWeLink",
+    "accountHint": "Schakelaars in de normale eWeLink LAN-besturingsmodus hebben een apparaatsleutel nodig, die alleen de eWeLink-cloud kent. Om de sleutels eenmalig op te halen: maak een app in het eWeLink-ontwikkelaarscentrum (dev.ewelink.cc) met de onderstaande omleidings-URL, voer de app-ID en het app-geheim in, klik op \"Aanmelden met eWeLink\" en log in met uw eWeLink-account. De browser opent vervolgens de redirect-URL, die mogelijk een foutpagina toont: kopieer het volledige adres uit de adresbalk naar het onderstaande veld en klik binnen enkele minuten op \"Apparaten ophalen\". De adapter bestuurt de switches alleen via het lokale netwerk; het blijft niet verbonden met de cloud.",
+    "devicesHint": "Eén rij per Sonoff-schakelaar. De naam wordt de objectboommap (ewelink.0.<naam>.control.power). Apparaten die uit uw eWeLink-account worden opgehaald, hebben alleen hun apparaat-ID nodig: hun IP-adres wordt geleerd uit hun netwerkaankondigingen en hun sleutel wordt gecodeerd opgeslagen. Voor een schakelaar in doe-het-zelf-modus voert u het IP-adres in; de apparaat-ID is optioneel.",
+    "eWeLink account": "eWeLink-account",
+    "pollIntervalHelp": "Hoe vaak elk apparaat wordt gevraagd naar zijn schakelstatus (5-3600 s)",
+    "redirectUrlHelp": "Moet exact de omleidings-URL zijn die voor de app is geregistreerd",
+    "signInAddressHelp": "Het volledige adres dat de browser toont na het inloggen, met code= en regio="
 }

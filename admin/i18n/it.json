@@ -1,11 +1,21 @@
 {
     "Active": "Attivo",
-    "Device ID (optional)": "ID dispositivo (facoltativo)",
+    "Address after sign-in": "Indirizzo dopo l'accesso",
+    "App ID": "ID dell'app",
+    "App Secret": "Segreto dell'app",
+    "Device ID": "ID del dispositivo",
     "Devices": "Dispositivi",
-    "IP address or host name": "Indirizzo IP o nome host",
+    "Fetch devices": "Recupera dispositivi",
+    "IP address (optional)": "Indirizzo IP (facoltativo)",
     "Name": "Nome",
     "Poll interval (s)": "Intervallo di sondaggio (s)",
     "Port": "Porta",
-    "devicesHint": "Una riga per interruttore Sonoff in modalità fai da te. Il nome diventa la cartella dell'albero degli oggetti (ewelink.0.<nome>.control.power); lasciarlo vuoto per utilizzare l'indirizzo IP. Assegna a ciascun dispositivo un indirizzo IP fisso nel router. L'ID dispositivo è necessario solo se un dispositivo rifiuta le richieste senza di esso.",
-    "pollIntervalHelp": "La frequenza con cui a ciascun dispositivo viene richiesto lo stato di commutazione (5-3600 s)"
+    "Redirect URL": "URL di reindirizzamento",
+    "Sign in with eWeLink": "Accedi con eWeLink",
+    "accountHint": "Gli switch nella normale modalità di controllo LAN eWeLink necessitano di una chiave del dispositivo, che solo il cloud eWeLink conosce. Per recuperare le chiavi una volta: crea un'app nel centro sviluppatori eWeLink (dev.ewelink.cc) con l'URL di reindirizzamento di seguito, inserisci l'ID app e il segreto dell'app, fai clic su \"Accedi con eWeLink\" e accedi con il tuo account eWeLink. Il browser apre quindi l'URL di reindirizzamento, che potrebbe mostrare una pagina di errore: copia l'indirizzo completo dalla barra degli indirizzi nel campo sottostante e clicca su \"Recupera dispositivi\" entro pochi minuti. L'adattatore controlla solo gli switch della rete locale; non rimane connesso al cloud.",
+    "devicesHint": "Una riga per interruttore Sonoff. Il nome diventa la cartella dell'albero degli oggetti (ewelink.0.<nome>.control.power). I dispositivi recuperati dal tuo account eWeLink necessitano solo del loro ID dispositivo: il loro indirizzo IP viene appreso dai loro annunci di rete e la loro chiave viene archiviata crittografata. Per uno switch in modalità fai da te, inserisci il suo indirizzo IP; il relativo ID dispositivo è facoltativo.",
+    "eWeLink account": "account eWeLink",
+    "pollIntervalHelp": "La frequenza con cui a ciascun dispositivo viene richiesto lo stato di commutazione (5-3600 s)",
+    "redirectUrlHelp": "Deve essere esattamente l'URL di reindirizzamento registrato per l'app",
+    "signInAddressHelp": "L'indirizzo completo che il browser mostra dopo l'accesso, contenente code= e regione="
 }

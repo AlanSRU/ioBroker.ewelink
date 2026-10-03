@@ -1,11 +1,21 @@
 {
     "Active": "启用",
-    "Device ID (optional)": "设备 ID（可选）",
+    "Address after sign-in": "登录后地址",
+    "App ID": "应用程序ID",
+    "App Secret": "应用秘密",
+    "Device ID": "设备ID",
     "Devices": "设备",
-    "IP address or host name": "IP 地址或主机名",
+    "Fetch devices": "获取设备",
+    "IP address (optional)": "IP 地址（可选）",
     "Name": "名称",
     "Poll interval (s)": "轮询间隔（秒）",
     "Port": "端口",
-    "devicesHint": "在 DIY 模式下，每个 Sonoff 开关一排。该名称成为对象树文件夹 (ewelink.0.<name>.control.power)；将其留空以使用 IP 地址。为路由器中的每个设备分配一个固定的 IP 地址。仅当设备拒绝没有设备 ID 的请求时才需要设备 ID。",
-    "pollIntervalHelp": "询问每个设备的开关状态的频率（5-3600 秒）"
+    "Redirect URL": "重定向网址",
+    "Sign in with eWeLink": "使用 eWeLink 登录",
+    "accountHint": "普通eWeLink LAN控制模式下的交换机需要设备密钥，只有eWeLink云知道。要获取一次密钥：使用下面的重定向 URL 在 eWeLink 开发人员中心 (dev.ewelink.cc) 创建一个应用程序，输入其应用程序 ID 和应用程序密钥，单击“使用 eWeLink 登录”并使用您的 eWeLink 帐户登录。然后，浏览器打开重定向 URL，这可能会显示错误页面：将地址栏中的完整地址复制到下面的字段中，然后在几分钟内单击“获取设备”。适配器仅控制本地网络上的交换机；它不保持与云的连接。",
+    "devicesHint": "每个 Sonoff 开关一排。该名称成为对象树文件夹 (ewelink.0.<name>.control.power)。从您的 eWeLink 帐户获取的设备仅需要其设备 ID：其 IP 地址是从其网络公告中获知的，并且其密钥是加密存储的。对于DIY模式的交换机，输入其IP地址；其设备ID是可选的。",
+    "eWeLink account": "易微联账户",
+    "pollIntervalHelp": "询问每个设备的开关状态的频率（5-3600 秒）",
+    "redirectUrlHelp": "必须与为应用程序注册的重定向 URL 完全相同",
+    "signInAddressHelp": "登录后浏览器显示的完整地址，包含code=和region="
 }

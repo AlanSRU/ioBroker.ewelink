@@ -1,82 +1,178 @@
 {
     "i18n": true,
-    "type": "panel",
+    "type": "tabs",
     "items": {
-        "devicesHint": {
-            "type": "staticText",
-            "text": "devicesHint",
-            "newLine": true,
-            "xs": 12,
-            "sm": 12,
-            "md": 12,
-            "lg": 12,
-            "xl": 12
-        },
-        "devices": {
-            "type": "table",
+        "devicesTab": {
+            "type": "panel",
             "label": "Devices",
-            "newLine": true,
-            "xs": 12,
-            "sm": 12,
-            "md": 12,
-            "lg": 12,
-            "xl": 12,
-            "clone": true,
-            "export": true,
-            "import": true,
-            "items": [
-                {
-                    "type": "checkbox",
-                    "attr": "enabled",
-                    "title": "Active",
-                    "width": "10%",
-                    "default": true
+            "items": {
+                "devicesHint": {
+                    "type": "staticText",
+                    "text": "devicesHint",
+                    "newLine": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "xl": 12
                 },
-                {
-                    "type": "text",
-                    "attr": "name",
-                    "title": "Name",
-                    "width": "25%",
-                    "default": "",
-                    "sort": true
+                "devices": {
+                    "type": "table",
+                    "label": "Devices",
+                    "newLine": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "xl": 12,
+                    "clone": true,
+                    "export": true,
+                    "import": true,
+                    "items": [
+                        {
+                            "type": "checkbox",
+                            "attr": "enabled",
+                            "title": "Active",
+                            "width": "10%",
+                            "default": true
+                        },
+                        {
+                            "type": "text",
+                            "attr": "name",
+                            "title": "Name",
+                            "width": "25%",
+                            "default": "",
+                            "sort": true
+                        },
+                        {
+                            "type": "text",
+                            "attr": "host",
+                            "title": "IP address (optional)",
+                            "width": "25%",
+                            "default": ""
+                        },
+                        {
+                            "type": "number",
+                            "attr": "port",
+                            "title": "Port",
+                            "width": "15%",
+                            "min": 1,
+                            "max": 65535,
+                            "default": 8081
+                        },
+                        {
+                            "type": "text",
+                            "attr": "deviceId",
+                            "title": "Device ID",
+                            "width": "25%",
+                            "default": ""
+                        }
+                    ]
                 },
-                {
-                    "type": "text",
-                    "attr": "host",
-                    "title": "IP address or host name",
-                    "width": "25%",
-                    "default": ""
-                },
-                {
+                "pollInterval": {
                     "type": "number",
-                    "attr": "port",
-                    "title": "Port",
-                    "width": "15%",
-                    "min": 1,
-                    "max": 65535,
-                    "default": 8081
-                },
-                {
-                    "type": "text",
-                    "attr": "deviceId",
-                    "title": "Device ID (optional)",
-                    "width": "25%",
-                    "default": ""
+                    "label": "Poll interval (s)",
+                    "help": "pollIntervalHelp",
+                    "min": 5,
+                    "max": 3600,
+                    "newLine": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 4,
+                    "lg": 3,
+                    "xl": 3
                 }
-            ]
+            }
         },
-        "pollInterval": {
-            "type": "number",
-            "label": "Poll interval (s)",
-            "help": "pollIntervalHelp",
-            "min": 5,
-            "max": 3600,
-            "newLine": true,
-            "xs": 12,
-            "sm": 12,
-            "md": 4,
-            "lg": 3,
-            "xl": 3
+        "accountTab": {
+            "type": "panel",
+            "label": "eWeLink account",
+            "items": {
+                "accountHint": {
+                    "type": "staticText",
+                    "text": "accountHint",
+                    "newLine": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "xl": 12
+                },
+                "appId": {
+                    "type": "text",
+                    "label": "App ID",
+                    "newLine": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4
+                },
+                "appSecret": {
+                    "type": "password",
+                    "label": "App Secret",
+                    "repeat": false,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4
+                },
+                "redirectUrl": {
+                    "type": "text",
+                    "label": "Redirect URL",
+                    "help": "redirectUrlHelp",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4
+                },
+                "signIn": {
+                    "type": "sendTo",
+                    "label": "Sign in with eWeLink",
+                    "command": "signIn",
+                    "jsonData": "{\"appId\":\"${data.appId}\",\"appSecret\":\"${data.appSecret}\",\"redirectUrl\":\"${data.redirectUrl}\"}",
+                    "openUrl": true,
+                    "window": "_blank",
+                    "variant": "contained",
+                    "showProcess": true,
+                    "timeout": 20000,
+                    "newLine": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 4,
+                    "lg": 3,
+                    "xl": 3
+                },
+                "signInAddress": {
+                    "type": "text",
+                    "label": "Address after sign-in",
+                    "help": "signInAddressHelp",
+                    "newLine": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "xl": 12
+                },
+                "fetchDevices": {
+                    "type": "sendTo",
+                    "label": "Fetch devices",
+                    "command": "fetchDevices",
+                    "jsonData": "{\"appId\":\"${data.appId}\",\"appSecret\":\"${data.appSecret}\",\"redirectUrl\":\"${data.redirectUrl}\",\"address\":\"${data.signInAddress}\"}",
+                    "useNative": true,
+                    "variant": "contained",
+                    "showProcess": true,
+                    "timeout": 60000,
+                    "newLine": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 4,
+                    "lg": 3,
+                    "xl": 3
+                }
+            }
         }
     }
 }

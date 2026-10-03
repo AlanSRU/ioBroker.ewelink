@@ -8,6 +8,77 @@ const NS = 'ewelink.0';
 // Run integration tests - See https://github.com/ioBroker/testing for a detailed explanation and further options
 tests.integration(path.join(__dirname, '..'), {
     defineAdditionalTests({ suite }) {
+        suite('Against a simulated switch in encrypted LAN control mode', getHarness => {
+            const KEY = '6d2c6b1a-0f3e-4b7a-9c55-1f2e3d4c5b6a';
+            let harness;
+            let sim;
+
+            const getState = id =>
+                new Promise((resolve, reject) =>
+                    harness.states.getState(`${NS}.${id}`, (err, state) => (err ? reject(err) : resolve(state))),
+                );
+            const setState = (id, val) =>
+                new Promise((resolve, reject) =>
+                    harness.states.setState(`${NS}.${id}`, { val, ack: false }, err => (err ? reject(err) : resolve())),
+                );
+            const waitFor = async (id, predicate, timeoutMs = 15000) => {
+                const end = Date.now() + timeoutMs;
+                let state;
+                while (Date.now() < end) {
+                    state = await getState(id);
+                    if (state && state.ack && predicate(state.val)) {
+                        return state.val;
+                    }
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                }
+                throw new Error(`${id} is ${JSON.stringify(state && state.val)} after ${timeoutMs} ms`);
+            };
+
+            before(async function () {
+                this.timeout(60000);
+                harness = getHarness();
+                sim = new DiySimulator({ deviceId: '100118cdd1', deviceKey: KEY });
+                await sim.listen();
+                await harness.changeAdapterConfig('ewelink', {
+                    native: {
+                        // no IP address: it is learned from the mDNS announcement
+                        devices: [{ enabled: true, name: 'Desk USB', host: '', port: 8081, deviceId: '100118cdd1' }],
+                        deviceKeys: JSON.stringify({ '100118cdd1': KEY }),
+                        pollInterval: 5,
+                    },
+                });
+                await harness.startAdapterAndWait(true);
+            });
+
+            after(async () => {
+                await sim?.close();
+            });
+
+            it('finds the device over mDNS and reads its encrypted state', async function () {
+                this.timeout(20000);
+                expect(await waitFor('desk_usb.info.reachable', v => v === true)).to.equal(true);
+                expect(await waitFor('desk_usb.control.power', v => v === false)).to.equal(false);
+                expect((await getState('desk_usb.info.deviceId')).val).to.equal('100118cdd1');
+            });
+
+            it('switches with encrypted commands', async function () {
+                this.timeout(20000);
+                await setState('desk_usb.control.power', true);
+                await waitFor('desk_usb.control.power', v => v === true);
+                expect(sim.state.switch).to.equal('on');
+                const command = sim.requests.filter(r => r.path === '/zeroconf/switch').pop();
+                expect(command.body).to.include({ deviceid: '100118cdd1', encrypt: true });
+                expect(command.body.decrypted).to.deep.equal({ switch: 'on' });
+            });
+
+            it('applies a state change the device announces', async function () {
+                this.timeout(20000);
+                sim.state.switch = 'off';
+                sim.announce();
+                expect(await waitFor('desk_usb.control.power', v => v === false)).to.equal(false);
+            });
+        });
+
         suite('Against a simulated DIY mode switch', getHarness => {
             let harness;
             let sim;

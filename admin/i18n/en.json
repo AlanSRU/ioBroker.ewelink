@@ -1,11 +1,21 @@
 {
-    "devicesHint": "One row per Sonoff switch in DIY mode. The name becomes the object-tree folder (ewelink.0.<name>.control.power); leave it empty to use the IP address. Give each device a fixed IP address in your router. The device ID is only needed if a device rejects requests without it.",
+    "devicesHint": "One row per Sonoff switch. The name becomes the object-tree folder (ewelink.0.<name>.control.power). Devices fetched from your eWeLink account need only their device ID: their IP address is learned from their network announcements, and their key is stored encrypted. For a switch in DIY mode, enter its IP address; its device ID is optional.",
     "Devices": "Devices",
     "Active": "Active",
     "Name": "Name",
-    "IP address or host name": "IP address or host name",
-    "Device ID (optional)": "Device ID (optional)",
     "Poll interval (s)": "Poll interval (s)",
     "pollIntervalHelp": "How often each device is asked for its switch state (5-3600 s)",
-    "Port": "Port"
+    "Port": "Port",
+    "IP address (optional)": "IP address (optional)",
+    "Device ID": "Device ID",
+    "eWeLink account": "eWeLink account",
+    "accountHint": "Switches in the normal eWeLink LAN control mode need a device key, which only the eWeLink cloud knows. To fetch the keys once: create an app in the eWeLink developer centre (dev.ewelink.cc) with the redirect URL below, enter its App ID and App Secret, click \"Sign in with eWeLink\" and sign in with your eWeLink account. The browser then opens the redirect URL, which may show an error page: copy the complete address from the address bar into the field below and click \"Fetch devices\" within a few minutes. The adapter controls the switches over the local network only; it does not stay connected to the cloud.",
+    "App ID": "App ID",
+    "App Secret": "App Secret",
+    "Redirect URL": "Redirect URL",
+    "redirectUrlHelp": "Must be exactly the redirect URL registered for the app",
+    "Sign in with eWeLink": "Sign in with eWeLink",
+    "Address after sign-in": "Address after sign-in",
+    "signInAddressHelp": "The complete address the browser shows after signing in, containing code= and region=",
+    "Fetch devices": "Fetch devices"
 }

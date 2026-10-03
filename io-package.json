@@ -31,17 +31,17 @@
             "zh-cn": "易微联局域网"
         },
         "desc": {
-            "en": "Control Sonoff / eWeLink switches on the local network using the DIY mode HTTP API (no cloud account).",
-            "de": "Steuern Sie Sonoff / eWeLink-Schalter im lokalen Netzwerk mithilfe der HTTP-API im DIY-Modus (kein Cloud-Konto).",
-            "ru": "Управляйте переключением Sonoff/eWeLink в локальной сети с помощью HTTP API режима DIY (без облачной учетной записи).",
-            "pt": "Controle os switches Sonoff / eWeLink na rede local usando a API HTTP do modo DIY (sem conta na nuvem).",
-            "nl": "Bedien Sonoff / eWeLink-schakelaars op het lokale netwerk met behulp van de DIY-modus HTTP API (geen cloudaccount).",
-            "fr": "Contrôlez les commutateurs Sonoff/eWeLink sur le réseau local à l'aide de l'API HTTP en mode DIY (pas de compte cloud).",
-            "it": "Controlla gli interruttori Sonoff / eWeLink sulla rete locale utilizzando l'API HTTP in modalità fai da te (nessun account cloud).",
-            "es": "Controle los interruptores Sonoff/eWeLink en la red local utilizando la API HTTP en modo DIY (sin cuenta en la nube).",
-            "pl": "Kontroluj przełączniki Sonoff / eWeLink w sieci lokalnej za pomocą interfejsu API HTTP w trybie DIY (bez konta w chmurze).",
-            "uk": "Контроль Sonoff / eWeLink вмикає локальну мережу за допомогою HTTP API режиму DIY (без хмарного облікового запису).",
-            "zh-cn": "使用DIY模式HTTP API（无云帐户）控制Sonoff / eWeLink在本地网络上的开关。"
+            "en": "Control Sonoff / eWeLink switches on the local network, in eWeLink LAN control mode or DIY mode.",
+            "de": "Steuern Sie Sonoff / eWeLink-Schalter im lokalen Netzwerk, im eWeLink LAN-Steuerungsmodus oder im DIY-Modus.",
+            "ru": "Управляйте переключателями Sonoff/eWeLink по локальной сети, в режиме управления eWeLink LAN или режиме DIY.",
+            "pt": "Controle os interruptores Sonoff / eWeLink na rede local, no modo de controle LAN eWeLink ou no modo DIY.",
+            "nl": "Bediening Sonoff / eWeLink schakelt het lokale netwerk in, in eWeLink LAN-besturingsmodus of DIY-modus.",
+            "fr": "Contrôlez les commutateurs Sonoff / eWeLink sur le réseau local, en mode de contrôle eWeLink LAN ou en mode DIY.",
+            "it": "Controlla gli interruttori Sonoff / eWeLink sulla rete locale, in modalità di controllo LAN eWeLink o in modalità fai-da-te.",
+            "es": "Controle los interruptores Sonoff / eWeLink en la red local, en modo de control LAN eWeLink o en modo DIY.",
+            "pl": "Sterowanie przełącznikami Sonoff/eWeLink w sieci lokalnej, w trybie sterowania eWeLink LAN lub w trybie DIY.",
+            "uk": "Управління Sonoff / eWeLink вмикає локальну мережу в режимі керування eWeLink LAN або режимі DIY.",
+            "zh-cn": "在eWeLink LAN控制模式或DIY模式下控制本地网络上的Sonoff / eWeLink交换机。"
         },
         "authors": [
             "Alan Paris <alan.paris@scottish.rugby>"
@@ -81,11 +81,19 @@
             {
                 "admin": ">=7.6.20"
             }
-        ]
+        ],
+        "supportedMessages": {
+            "custom": true
+        }
     },
     "native": {
         "devices": [],
-        "pollInterval": 10
+        "pollInterval": 10,
+        "appId": "",
+        "appSecret": "",
+        "redirectUrl": "http://127.0.0.1:8000/callback",
+        "signInAddress": "",
+        "deviceKeys": ""
     },
     "objects": [],
     "instanceObjects": [
@@ -110,5 +118,16 @@
             },
             "native": {}
         }
+    ],
+    "protectedNative": [
+        "appId",
+        "appSecret",
+        "signInAddress",
+        "deviceKeys"
+    ],
+    "encryptedNative": [
+        "appSecret",
+        "signInAddress",
+        "deviceKeys"
     ]
 }

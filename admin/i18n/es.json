@@ -1,11 +1,21 @@
 {
     "Active": "Activo",
-    "Device ID (optional)": "ID del dispositivo (opcional)",
+    "Address after sign-in": "Dirección después de iniciar sesión",
+    "App ID": "ID de aplicación",
+    "App Secret": "Secreto de la aplicación",
+    "Device ID": "ID del dispositivo",
     "Devices": "Dispositivos",
-    "IP address or host name": "Dirección IP o nombre de host",
+    "Fetch devices": "Buscar dispositivos",
+    "IP address (optional)": "Dirección IP (opcional)",
     "Name": "Nombre",
     "Poll interval (s)": "Intervalo(s) de encuesta",
     "Port": "Puerto",
-    "devicesHint": "Una fila por interruptor Sonoff en modo DIY. El nombre se convierte en la carpeta del árbol de objetos (ewelink.0.<nombre>.control.power); déjelo vacío para usar la dirección IP. Asigne a cada dispositivo una dirección IP fija en su enrutador. El ID del dispositivo solo es necesario si un dispositivo rechaza solicitudes sin él.",
-    "pollIntervalHelp": "Con qué frecuencia se solicita a cada dispositivo su estado de conmutación (5-3600 s)"
+    "Redirect URL": "URL de redireccionamiento",
+    "Sign in with eWeLink": "Iniciar sesión con eWeLink",
+    "accountHint": "Los interruptores en el modo de control LAN normal de eWeLink necesitan una clave de dispositivo, que solo la nube de eWeLink conoce. Para recuperar las claves una vez: cree una aplicación en el centro de desarrolladores de eWeLink (dev.ewelink.cc) con la URL de redireccionamiento a continuación, ingrese su ID de aplicación y su secreto de aplicación, haga clic en \"Iniciar sesión con eWeLink\" e inicie sesión con su cuenta de eWeLink. Luego, el navegador abre la URL de redireccionamiento, que puede mostrar una página de error: copie la dirección completa de la barra de direcciones en el campo a continuación y haga clic en \"Obtener dispositivos\" dentro de unos minutos. El adaptador controla los conmutadores únicamente a través de la red local; no permanece conectado a la nube.",
+    "devicesHint": "Una fila por interruptor Sonoff. El nombre se convierte en la carpeta del árbol de objetos (ewelink.0.<nombre>.control.power). Los dispositivos obtenidos de su cuenta eWeLink solo necesitan su ID de dispositivo: su dirección IP se aprende de sus anuncios de red y su clave se almacena cifrada. Para un interruptor en modo DIY, ingrese su dirección IP; su ID de dispositivo es opcional.",
+    "eWeLink account": "cuenta eWeLink",
+    "pollIntervalHelp": "Con qué frecuencia se solicita a cada dispositivo su estado de conmutación (5-3600 s)",
+    "redirectUrlHelp": "Debe ser exactamente la URL de redireccionamiento registrada para la aplicación.",
+    "signInAddressHelp": "La dirección completa que muestra el navegador después de iniciar sesión, que contiene código= y región="
 }

@@ -3,7 +3,12 @@
  * port 8081, paths /zeroconf/<command>. Every reply looks like
  * { "seq": 1, "error": 0, "data": {...} }; firmware 3.3 and older send "data"
  * as a JSON-encoded string instead of an object.
+ *
+ * Devices in the normal eWeLink "LAN control" mode take the same commands,
+ * but the "data" of requests (and of replies that carry any) is AES-128-CBC
+ * encrypted with the MD5 of the device key, which only the eWeLink cloud knows.
  */
+import * as crypto from 'node:crypto';
 import * as http from 'node:http';
 
 /** Default DIY mode HTTP port. */
@@ -12,7 +17,7 @@ export const DIY_PORT = 8081;
 /** Meaning of the non-zero "error" codes of the DIY API. */
 const ERROR_TEXT: Record<number, string> = {
     400: 'the device rejected the request format',
-    401: 'unauthorized — is the device really in DIY mode (not encrypted LAN mode)?',
+    401: 'unauthorized — the device key is wrong, or the device needs one (fetch the devices from eWeLink)',
     404: 'device ID not recognised — check the device ID in the settings or leave it empty',
     422: 'the device rejected the request parameters',
 };
@@ -46,8 +51,10 @@ export interface DiyTarget {
     host: string;
     /** HTTP port, DIY_PORT by default */
     port?: number;
-    /** device ID; may be empty, the DIY API accepts "" from a device on the LAN */
+    /** device ID; may be empty for a DIY device, the DIY API accepts "" on the LAN */
     deviceId: string;
+    /** eWeLink device key; set for devices in encrypted LAN mode, empty for DIY mode */
+    deviceKey?: string;
     /** request timeout in ms */
     timeoutMs: number;
 }
@@ -64,7 +71,17 @@ export function diyRequest(
     command: string,
     data: Record<string, unknown> = {},
 ): Promise<Record<string, unknown>> {
-    const body = JSON.stringify({ deviceid: target.deviceId, data });
+    const body = JSON.stringify(
+        target.deviceKey
+            ? {
+                  sequence: String(Date.now()),
+                  deviceid: target.deviceId,
+                  selfApikey: '123',
+                  encrypt: true,
+                  ...encrypt(data, target.deviceKey),
+              }
+            : { deviceid: target.deviceId, data },
+    );
     return new Promise((resolve, reject) => {
         const req = http.request(
             {
@@ -89,7 +106,7 @@ export function diyRequest(
                         return;
                     }
                     try {
-                        resolve(parseReply(Buffer.concat(chunks).toString('utf8')));
+                        resolve(parseReply(Buffer.concat(chunks).toString('utf8'), target.deviceKey));
                     } catch (error) {
                         reject(error instanceof Error ? error : new Error(String(error)));
                     }
@@ -105,11 +122,12 @@ export function diyRequest(
 }
 
 /**
- * Parse a DIY reply body into its "data" object.
+ * Parse a reply body into its "data" object.
  *
  * @param text - the HTTP response body
+ * @param deviceKey - device key, to decrypt an encrypted reply
  */
-export function parseReply(text: string): Record<string, unknown> {
+export function parseReply(text: string, deviceKey?: string): Record<string, unknown> {
     let reply: unknown;
     try {
         reply = JSON.parse(text);
@@ -124,6 +142,12 @@ export function parseReply(text: string): Record<string, unknown> {
         throw new DiyError(code);
     }
     let data = reply.data ?? {};
+    if (typeof data === 'string' && typeof reply.iv === 'string' && data) {
+        if (!deviceKey) {
+            throw new Error('the device sent encrypted data, but no device key is configured');
+        }
+        data = decrypt(data, reply.iv, deviceKey);
+    }
     if (typeof data === 'string') {
         // firmware 3.3 and older
         try {
@@ -158,6 +182,46 @@ export function toInfo(data: Record<string, unknown>): DiyInfo {
         info.signalStrength = data.signalStrength;
     }
     return info;
+}
+
+/**
+ * Encrypt command parameters for a device in encrypted LAN mode.
+ *
+ * @param data - command parameters
+ * @param deviceKey - eWeLink device key
+ */
+export function encrypt(data: Record<string, unknown>, deviceKey: string): { iv: string; data: string } {
+    const iv = crypto.randomBytes(16);
+    const cipher = crypto.createCipheriv('aes-128-cbc', aesKey(deviceKey), iv);
+    const encrypted = Buffer.concat([cipher.update(JSON.stringify(data), 'utf8'), cipher.final()]);
+    return { iv: iv.toString('base64'), data: encrypted.toString('base64') };
+}
+
+/**
+ * Decrypt the base64 "data" of an encrypted reply or mDNS announcement to its JSON text.
+ *
+ * @param data - base64 cipher text
+ * @param iv - base64 initialisation vector
+ * @param deviceKey - eWeLink device key
+ */
+export function decrypt(data: string, iv: string, deviceKey: string): string {
+    try {
+        const decipher = crypto.createDecipheriv('aes-128-cbc', aesKey(deviceKey), Buffer.from(iv, 'base64'));
+        const text = Buffer.concat([decipher.update(Buffer.from(data, 'base64')), decipher.final()]).toString('utf8');
+        // some firmware pads with extra 0x02 bytes after the JSON
+        let end = text.length;
+        while (end > 0 && text.charCodeAt(end - 1) === 2) {
+            end--;
+        }
+        return text.substring(0, end);
+    } catch {
+        // a wrong key fails the padding check
+        throw new Error('cannot decrypt the device data — is the device key right?');
+    }
+}
+
+function aesKey(deviceKey: string): Buffer {
+    return crypto.createHash('md5').update(deviceKey, 'utf8').digest();
 }
 
 function isObject(value: unknown): value is Record<string, unknown> {
