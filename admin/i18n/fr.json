@@ -1,0 +1,11 @@
+{
+    "Active": "Actif",
+    "Device ID (optional)": "ID de l'appareil (facultatif)",
+    "Devices": "Appareils",
+    "IP address or host name": "Adresse IP ou nom d'hôte",
+    "Name": "Nom",
+    "Poll interval (s)": "Intervalle(s) d'interrogation",
+    "Port": "Port",
+    "devicesHint": "Une rangée par interrupteur Sonoff en mode DIY. Le nom devient le dossier de l'arborescence des objets (ewelink.0.<name>.control.power) ; laissez-le vide pour utiliser l'adresse IP. Donnez à chaque appareil une adresse IP fixe dans votre routeur. L'ID de l'appareil n'est nécessaire que si un appareil rejette les demandes sans lui.",
+    "pollIntervalHelp": "À quelle fréquence chaque appareil est demandé son état de commutation (5-3600 s)"
+}

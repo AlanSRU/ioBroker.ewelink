@@ -1,0 +1,11 @@
+{
+    "Active": "Actief",
+    "Device ID (optional)": "Apparaat-ID (optioneel)",
+    "Devices": "Apparaten",
+    "IP address or host name": "IP-adres of hostnaam",
+    "Name": "Naam",
+    "Poll interval (s)": "Poll-interval (s)",
+    "Port": "Poort",
+    "devicesHint": "Eén rij per Sonoff-schakelaar in doe-het-zelf-modus. De naam wordt de objectboommap (ewelink.0.<naam>.control.power); laat het leeg om het IP-adres te gebruiken. Geef elk apparaat een vast IP-adres in uw router. De apparaat-ID is alleen nodig als een apparaat verzoeken zonder deze ID afwijst.",
+    "pollIntervalHelp": "Hoe vaak elk apparaat wordt gevraagd naar zijn schakelstatus (5-3600 s)"
+}

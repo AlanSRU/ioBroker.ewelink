@@ -1,0 +1,11 @@
+{
+    "Active": "Aktiv",
+    "Device ID (optional)": "Geräte-ID (optional)",
+    "Devices": "Geräte",
+    "IP address or host name": "IP-Adresse oder Hostname",
+    "Name": "Name",
+    "Poll interval (s)": "Abfrageintervall (s)",
+    "Port": "Port",
+    "devicesHint": "Eine Reihe pro Sonoff-Schalter im DIY-Modus. Der Name wird zum Objektbaumordner (ewelink.0.<name>.control.power); Lassen Sie das Feld leer, um die IP-Adresse zu verwenden. Geben Sie jedem Gerät eine feste IP-Adresse in Ihrem Router. Die Geräte-ID wird nur benötigt, wenn ein Gerät Anfragen ohne sie ablehnt.",
+    "pollIntervalHelp": "Wie oft wird jedes Gerät nach seinem Schaltzustand gefragt (5-3600 s)"
+}

@@ -1,0 +1,11 @@
+{
+    "Active": "Ativo",
+    "Device ID (optional)": "ID do dispositivo (opcional)",
+    "Devices": "Dispositivos",
+    "IP address or host name": "Endereço IP ou nome do host",
+    "Name": "Nome",
+    "Poll interval (s)": "Intervalo(s) de pesquisa",
+    "Port": "Porta",
+    "devicesHint": "Uma linha por switch Sonoff no modo DIY. O nome se torna a pasta da árvore de objetos (ewelink.0.<nome>.control.power); deixe em branco para usar o endereço IP. Dê a cada dispositivo um endereço IP fixo em seu roteador. O ID do dispositivo só será necessário se um dispositivo rejeitar solicitações sem ele.",
+    "pollIntervalHelp": "Com que frequência cada dispositivo é questionado sobre seu estado de comutação (5-3600 s)"
+}

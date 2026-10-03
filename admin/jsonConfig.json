@@ -1,0 +1,82 @@
+{
+    "i18n": true,
+    "type": "panel",
+    "items": {
+        "devicesHint": {
+            "type": "staticText",
+            "text": "devicesHint",
+            "newLine": true,
+            "xs": 12,
+            "sm": 12,
+            "md": 12,
+            "lg": 12,
+            "xl": 12
+        },
+        "devices": {
+            "type": "table",
+            "label": "Devices",
+            "newLine": true,
+            "xs": 12,
+            "sm": 12,
+            "md": 12,
+            "lg": 12,
+            "xl": 12,
+            "clone": true,
+            "export": true,
+            "import": true,
+            "items": [
+                {
+                    "type": "checkbox",
+                    "attr": "enabled",
+                    "title": "Active",
+                    "width": "10%",
+                    "default": true
+                },
+                {
+                    "type": "text",
+                    "attr": "name",
+                    "title": "Name",
+                    "width": "25%",
+                    "default": "",
+                    "sort": true
+                },
+                {
+                    "type": "text",
+                    "attr": "host",
+                    "title": "IP address or host name",
+                    "width": "25%",
+                    "default": ""
+                },
+                {
+                    "type": "number",
+                    "attr": "port",
+                    "title": "Port",
+                    "width": "15%",
+                    "min": 1,
+                    "max": 65535,
+                    "default": 8081
+                },
+                {
+                    "type": "text",
+                    "attr": "deviceId",
+                    "title": "Device ID (optional)",
+                    "width": "25%",
+                    "default": ""
+                }
+            ]
+        },
+        "pollInterval": {
+            "type": "number",
+            "label": "Poll interval (s)",
+            "help": "pollIntervalHelp",
+            "min": 5,
+            "max": 3600,
+            "newLine": true,
+            "xs": 12,
+            "sm": 12,
+            "md": 4,
+            "lg": 3,
+            "xl": 3
+        }
+    }
+}

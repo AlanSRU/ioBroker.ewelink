@@ -1,0 +1,114 @@
+{
+    "common": {
+        "name": "ewelink",
+        "version": "0.0.1",
+        "news": {
+            "0.0.1": {
+                "en": "initial release",
+                "de": "Erstveröffentlichung",
+                "ru": "Начальная версия",
+                "pt": "lançamento inicial",
+                "nl": "Eerste uitgave",
+                "fr": "Première version",
+                "it": "Versione iniziale",
+                "es": "Versión inicial",
+                "pl": "Pierwsze wydanie",
+                "uk": "Початкова версія",
+                "zh-cn": "首次出版"
+            }
+        },
+        "titleLang": {
+            "en": "eWeLink LAN",
+            "de": "eWeLink LAN",
+            "ru": "eWeLink LAN",
+            "pt": "eWeLink LAN",
+            "nl": "eWeLink LAN",
+            "fr": "Réseau local eWeLink",
+            "it": "eWeLink LAN",
+            "es": "LAN eWeLink",
+            "pl": "eWeLink LAN",
+            "uk": "eWeLink LAN",
+            "zh-cn": "易微联局域网"
+        },
+        "desc": {
+            "en": "Control Sonoff / eWeLink switches on the local network using the DIY mode HTTP API (no cloud account).",
+            "de": "Steuern Sie Sonoff / eWeLink-Schalter im lokalen Netzwerk mithilfe der HTTP-API im DIY-Modus (kein Cloud-Konto).",
+            "ru": "Управляйте переключением Sonoff/eWeLink в локальной сети с помощью HTTP API режима DIY (без облачной учетной записи).",
+            "pt": "Controle os switches Sonoff / eWeLink na rede local usando a API HTTP do modo DIY (sem conta na nuvem).",
+            "nl": "Bedien Sonoff / eWeLink-schakelaars op het lokale netwerk met behulp van de DIY-modus HTTP API (geen cloudaccount).",
+            "fr": "Contrôlez les commutateurs Sonoff/eWeLink sur le réseau local à l'aide de l'API HTTP en mode DIY (pas de compte cloud).",
+            "it": "Controlla gli interruttori Sonoff / eWeLink sulla rete locale utilizzando l'API HTTP in modalità fai da te (nessun account cloud).",
+            "es": "Controle los interruptores Sonoff/eWeLink en la red local utilizando la API HTTP en modo DIY (sin cuenta en la nube).",
+            "pl": "Kontroluj przełączniki Sonoff / eWeLink w sieci lokalnej za pomocą interfejsu API HTTP w trybie DIY (bez konta w chmurze).",
+            "uk": "Контроль Sonoff / eWeLink вмикає локальну мережу за допомогою HTTP API режиму DIY (без хмарного облікового запису).",
+            "zh-cn": "使用DIY模式HTTP API（无云帐户）控制Sonoff / eWeLink在本地网络上的开关。"
+        },
+        "authors": [
+            "Alan Paris <alan.paris@scottish.rugby>"
+        ],
+        "keywords": [
+            "sonoff",
+            "ewelink",
+            "diy",
+            "switch",
+            "relay"
+        ],
+        "licenseInformation": {
+            "type": "free",
+            "license": "MIT"
+        },
+        "platform": "Javascript/Node.js",
+        "icon": "ewelink.png",
+        "enabled": true,
+        "extIcon": "https://raw.githubusercontent.com/AlanSRU/ioBroker.ewelink/main/admin/ewelink.png",
+        "readme": "https://github.com/AlanSRU/ioBroker.ewelink/blob/main/README.md",
+        "loglevel": "info",
+        "tier": 3,
+        "mode": "daemon",
+        "type": "iot-systems",
+        "compact": true,
+        "connectionType": "local",
+        "dataSource": "poll",
+        "adminUI": {
+            "config": "json"
+        },
+        "dependencies": [
+            {
+                "js-controller": ">=6.0.11"
+            }
+        ],
+        "globalDependencies": [
+            {
+                "admin": ">=7.6.20"
+            }
+        ]
+    },
+    "native": {
+        "devices": [],
+        "pollInterval": 10
+    },
+    "objects": [],
+    "instanceObjects": [
+        {
+            "_id": "info",
+            "type": "channel",
+            "common": {
+                "name": "Information"
+            },
+            "native": {}
+        },
+        {
+            "_id": "info.connection",
+            "type": "state",
+            "common": {
+                "role": "indicator.connected",
+                "name": "Device or service connected",
+                "type": "boolean",
+                "read": true,
+                "write": false,
+                "def": false
+            },
+            "native": {}
+        }
+    ]
+}

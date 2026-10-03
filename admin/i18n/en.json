@@ -1,0 +1,11 @@
+{
+    "devicesHint": "One row per Sonoff switch in DIY mode. The name becomes the object-tree folder (ewelink.0.<name>.control.power); leave it empty to use the IP address. Give each device a fixed IP address in your router. The device ID is only needed if a device rejects requests without it.",
+    "Devices": "Devices",
+    "Active": "Active",
+    "Name": "Name",
+    "IP address or host name": "IP address or host name",
+    "Device ID (optional)": "Device ID (optional)",
+    "Poll interval (s)": "Poll interval (s)",
+    "pollIntervalHelp": "How often each device is asked for its switch state (5-3600 s)",
+    "Port": "Port"
+}

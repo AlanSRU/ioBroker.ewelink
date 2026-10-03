@@ -1,0 +1,11 @@
+{
+    "Active": "启用",
+    "Device ID (optional)": "设备 ID（可选）",
+    "Devices": "设备",
+    "IP address or host name": "IP 地址或主机名",
+    "Name": "名称",
+    "Poll interval (s)": "轮询间隔（秒）",
+    "Port": "端口",
+    "devicesHint": "在 DIY 模式下，每个 Sonoff 开关一排。该名称成为对象树文件夹 (ewelink.0.<name>.control.power)；将其留空以使用 IP 地址。为路由器中的每个设备分配一个固定的 IP 地址。仅当设备拒绝没有设备 ID 的请求时才需要设备 ID。",
+    "pollIntervalHelp": "询问每个设备的开关状态的频率（5-3600 秒）"
+}
