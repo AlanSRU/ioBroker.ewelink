@@ -143,6 +143,12 @@ function toInfo(data) {
   const info = {};
   if (data.switch === "on" || data.switch === "off") {
     info.switch = data.switch;
+  } else if (Array.isArray(data.switches)) {
+    const outlet = data.switches.find((s) => isObject(s) && s.outlet === 0);
+    if ((outlet == null ? void 0 : outlet.switch) === "on" || (outlet == null ? void 0 : outlet.switch) === "off") {
+      info.switch = outlet.switch;
+      info.outlets = true;
+    }
   }
   if (typeof data.fwVersion === "string") {
     info.fwVersion = data.fwVersion;
@@ -152,6 +158,8 @@ function toInfo(data) {
   }
   if (typeof data.signalStrength === "number" && Number.isFinite(data.signalStrength)) {
     info.signalStrength = data.signalStrength;
+  } else if (typeof data.rssi === "number" && Number.isFinite(data.rssi)) {
+    info.signalStrength = data.rssi;
   }
   return info;
 }

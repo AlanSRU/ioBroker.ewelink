@@ -37,6 +37,8 @@ export class DiyError extends Error {
 export interface DiyInfo {
     /** relay state, "on" or "off" */
     switch?: string;
+    /** the state came as outlet 0 of "switches", so commands must go to /zeroconf/switches */
+    outlets?: boolean;
     /** firmware version */
     fwVersion?: string;
     /** eWeLink device ID */
@@ -63,7 +65,7 @@ export interface DiyTarget {
  * Send one DIY command and return the reply's "data" object.
  *
  * @param target - device address and request timeout
- * @param command - path below /zeroconf/, e.g. "info" or "switch"
+ * @param command - path below /zeroconf/, e.g. "info", "switch" or "switches"
  * @param data - command parameters
  */
 export function diyRequest(
@@ -171,6 +173,14 @@ export function toInfo(data: Record<string, unknown>): DiyInfo {
     const info: DiyInfo = {};
     if (data.switch === 'on' || data.switch === 'off') {
         info.switch = data.switch;
+    } else if (Array.isArray(data.switches)) {
+        // multi-channel firmware, also used by single-relay devices such as the Sonoff MICRO
+        const outlet = (data.switches as unknown[]).find(s => isObject(s) && s.outlet === 0) as
+            Record<string, unknown> | undefined;
+        if (outlet?.switch === 'on' || outlet?.switch === 'off') {
+            info.switch = outlet.switch;
+            info.outlets = true;
+        }
     }
     if (typeof data.fwVersion === 'string') {
         info.fwVersion = data.fwVersion;
@@ -180,6 +190,9 @@ export function toInfo(data: Record<string, unknown>): DiyInfo {
     }
     if (typeof data.signalStrength === 'number' && Number.isFinite(data.signalStrength)) {
         info.signalStrength = data.signalStrength;
+    } else if (typeof data.rssi === 'number' && Number.isFinite(data.rssi)) {
+        // the name in mDNS announcements
+        info.signalStrength = data.rssi;
     }
     return info;
 }

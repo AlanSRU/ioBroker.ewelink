@@ -43,6 +43,7 @@ const API = {
 };
 const LOGIN_PAGE = "https://c2ccdn.coolkit.cc/oauth/index.html";
 const REQUEST_TIMEOUT_MS = 15e3;
+const SINGLE_RELAY_OUTLET_UIIDS = [77];
 function sign(message, appSecret) {
   return crypto.createHmac("sha256", appSecret).update(message).digest("base64");
 }
@@ -99,7 +100,7 @@ async function fetchDevices(app, redirect) {
   return toDevices(list.thingList);
 }
 function toDevices(thingList) {
-  var _a;
+  var _a, _b;
   const devices = [];
   for (const thing of Array.isArray(thingList) ? thingList : []) {
     const item = thing == null ? void 0 : thing.itemData;
@@ -107,11 +108,12 @@ function toDevices(thingList) {
       continue;
     }
     const params = (_a = item.params) != null ? _a : {};
+    const uiid = (_b = item.extra) == null ? void 0 : _b.uiid;
     devices.push({
       deviceId: item.deviceid,
       name: typeof item.name === "string" ? item.name : item.deviceid,
       deviceKey: item.devicekey,
-      singleSwitch: params.switch === "on" || params.switch === "off"
+      singleSwitch: params.switch === "on" || params.switch === "off" || SINGLE_RELAY_OUTLET_UIIDS.includes(uiid)
     });
   }
   return devices;

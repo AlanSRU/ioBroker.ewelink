@@ -45,12 +45,23 @@ describe('toDevices', () => {
                 itemType: 1,
                 itemData: { deviceid: '1000aaaaaa', name: '4CH', devicekey: 'k2', params: { switches: [] } },
             },
+            {
+                itemType: 1,
+                itemData: {
+                    deviceid: '1000bbbbbb',
+                    name: 'MICRO',
+                    devicekey: 'k3',
+                    extra: { uiid: 77 },
+                    params: { switches: [{ switch: 'off', outlet: 0 }] },
+                },
+            },
             { itemType: 3, itemData: { id: 'group1', name: 'Group' } },
             null,
         ];
         expect(toDevices(list)).to.deep.equal([
             { deviceId: '100118cdd1', name: 'Desk USB', deviceKey: 'k1', singleSwitch: true },
             { deviceId: '1000aaaaaa', name: '4CH', deviceKey: 'k2', singleSwitch: false },
+            { deviceId: '1000bbbbbb', name: 'MICRO', deviceKey: 'k3', singleSwitch: true },
         ]);
         expect(toDevices(undefined)).to.deep.equal([]);
     });

@@ -130,6 +130,7 @@ class Ewelink extends utils.Adapter {
           timeoutMs: REQUEST_TIMEOUT_MS
         },
         encrypted: !!deviceKey,
+        outlets: false,
         reachable: false,
         polling: false,
         refreshPending: false,
@@ -220,6 +221,9 @@ class Ewelink extends utils.Adapter {
    */
   async applyInfo(d, info) {
     const updates = [];
+    if (info.outlets) {
+      d.outlets = true;
+    }
     if (info.switch) {
       updates.push(["control.power", info.switch === "on"]);
     }
@@ -429,7 +433,8 @@ class Ewelink extends utils.Adapter {
       if (!d.target.host) {
         throw new Error("IP address not known yet \u2014 waiting for the device to announce itself over mDNS");
       }
-      await (0, import_diy.diyRequest)(d.target, "switch", { switch: on ? "on" : "off" });
+      const value = on ? "on" : "off";
+      await (d.outlets ? (0, import_diy.diyRequest)(d.target, "switches", { switches: [{ switch: value, outlet: 0 }] }) : (0, import_diy.diyRequest)(d.target, "switch", { switch: value }));
       if (this.stopped) {
         return;
       }

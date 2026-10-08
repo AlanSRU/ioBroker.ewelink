@@ -87,6 +87,16 @@ describe('toInfo', () => {
     it('keeps a genuine zero signal strength', () => {
         expect(toInfo({ signalStrength: 0 })).to.deep.equal({ signalStrength: 0 });
     });
+
+    it('reads outlet 0 and rssi of a multi-channel announcement (Sonoff MICRO)', () => {
+        const switches = [1, 0, 2, 3].map(outlet => ({ switch: outlet ? 'off' : 'on', outlet }));
+        expect(toInfo({ switches, configure: [], sledOnline: 'on', rssi: -64 })).to.deep.equal({
+            switch: 'on',
+            outlets: true,
+            signalStrength: -64,
+        });
+        expect(toInfo({ switches: [{ switch: 'off', outlet: 1 }, null] })).to.deep.equal({});
+    });
 });
 
 describe('diyRequest', () => {

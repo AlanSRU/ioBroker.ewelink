@@ -29,6 +29,12 @@ export interface CloudApp {
     redirectUrl: string;
 }
 
+/**
+ * Device types (eWeLink uiid) with one relay that report it as outlet 0 of a
+ * multi-channel "switches" list: 77 = Sonoff MICRO.
+ */
+const SINGLE_RELAY_OUTLET_UIIDS = [77];
+
 /** A device from the user's eWeLink account. */
 export interface CloudDevice {
     /** eWeLink device ID */
@@ -37,7 +43,7 @@ export interface CloudDevice {
     name: string;
     /** key for encrypted LAN control */
     deviceKey: string;
-    /** whether the device reports a single relay ("switch"), the only kind supported so far */
+    /** whether the device has a single relay, the only kind supported so far */
     singleSwitch: boolean;
 }
 
@@ -141,11 +147,13 @@ export function toDevices(thingList: unknown): CloudDevice[] {
             continue;
         }
         const params = (item.params ?? {}) as Record<string, unknown>;
+        const uiid = (item.extra as { uiid?: unknown } | undefined)?.uiid;
         devices.push({
             deviceId: item.deviceid,
             name: typeof item.name === 'string' ? item.name : item.deviceid,
             deviceKey: item.devicekey,
-            singleSwitch: params.switch === 'on' || params.switch === 'off',
+            singleSwitch:
+                params.switch === 'on' || params.switch === 'off' || SINGLE_RELAY_OUTLET_UIIDS.includes(uiid as number),
         });
     }
     return devices;

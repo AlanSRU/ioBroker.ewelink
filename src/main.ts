@@ -52,6 +52,8 @@ interface Device {
     target: DiyTarget;
     /** has a device key: state comes from mDNS, not from HTTP polls */
     encrypted: boolean;
+    /** reports its relay as outlet 0 of "switches"; it ignores the plain "switch" command */
+    outlets: boolean;
     reachable: boolean;
     polling: boolean;
     /** a refresh was asked for while a poll was running */
@@ -177,6 +179,7 @@ class Ewelink extends utils.Adapter {
                     timeoutMs: REQUEST_TIMEOUT_MS,
                 },
                 encrypted: !!deviceKey,
+                outlets: false,
                 reachable: false,
                 polling: false,
                 refreshPending: false,
@@ -279,6 +282,9 @@ class Ewelink extends utils.Adapter {
      */
     private async applyInfo(d: Device, info: DiyInfo): Promise<void> {
         const updates: [string, ioBroker.StateValue][] = [];
+        if (info.outlets) {
+            d.outlets = true;
+        }
         if (info.switch) {
             updates.push(['control.power', info.switch === 'on']);
         }
@@ -499,7 +505,10 @@ class Ewelink extends utils.Adapter {
             if (!d.target.host) {
                 throw new Error('IP address not known yet — waiting for the device to announce itself over mDNS');
             }
-            await diyRequest(d.target, 'switch', { switch: on ? 'on' : 'off' });
+            const value = on ? 'on' : 'off';
+            await (d.outlets
+                ? diyRequest(d.target, 'switches', { switches: [{ switch: value, outlet: 0 }] })
+                : diyRequest(d.target, 'switch', { switch: value }));
             if (this.stopped) {
                 return;
             }
