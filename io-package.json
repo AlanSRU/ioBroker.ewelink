@@ -93,7 +93,9 @@
         "appSecret": "",
         "redirectUrl": "http://127.0.0.1:8000/callback",
         "signInAddress": "",
-        "deviceKeys": ""
+        "deviceKeys": "",
+        "manualDeviceId": "",
+        "manualDeviceKey": ""
     },
     "objects": [],
     "instanceObjects": [
@@ -123,11 +125,13 @@
         "appId",
         "appSecret",
         "signInAddress",
-        "deviceKeys"
+        "deviceKeys",
+        "manualDeviceKey"
     ],
     "encryptedNative": [
         "appSecret",
         "signInAddress",
-        "deviceKeys"
+        "deviceKeys",
+        "manualDeviceKey"
     ]
 }

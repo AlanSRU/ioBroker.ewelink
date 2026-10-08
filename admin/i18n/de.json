@@ -17,5 +17,8 @@
     "eWeLink account": "eWeLink-Konto",
     "pollIntervalHelp": "Wie oft wird jedes Gerät nach seinem Schaltzustand gefragt (5-3600 s)",
     "redirectUrlHelp": "Muss genau die Weiterleitungs-URL sein, die für die App registriert ist",
-    "signInAddressHelp": "Die vollständige Adresse, die der Browser nach der Anmeldung anzeigt, einschließlich code= und region="
+    "signInAddressHelp": "Die vollständige Adresse, die der Browser nach der Anmeldung anzeigt, einschließlich code= und region=",
+    "manualKeyHint": "Kein Entwicklerkonto? Wenn der Schlüssel eines Geräts bereits bekannt ist, zum Beispiel aus der Sonoff-LAN-Integration von Home Assistant, hier Geräte-ID und Schlüssel eingeben und auf \"Geräteschlüssel speichern\" klicken. Der Schlüssel wird verschlüsselt gespeichert; ein Gerät, das noch nicht in der Gerätetabelle steht, wird hinzugefügt.",
+    "Device key": "Geräteschlüssel",
+    "Save device key": "Geräteschlüssel speichern"
 }

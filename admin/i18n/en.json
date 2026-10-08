@@ -17,5 +17,8 @@
     "Sign in with eWeLink": "Sign in with eWeLink",
     "Address after sign-in": "Address after sign-in",
     "signInAddressHelp": "The complete address the browser shows after signing in, containing code= and region=",
-    "Fetch devices": "Fetch devices"
+    "Fetch devices": "Fetch devices",
+    "manualKeyHint": "No developer account? If you already know a device's key, for example from the Sonoff LAN integration of Home Assistant, enter its device ID and key here and click \"Save device key\". The key is stored encrypted; a device that is not in the device table yet is added to it.",
+    "Device key": "Device key",
+    "Save device key": "Save device key"
 }

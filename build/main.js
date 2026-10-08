@@ -476,11 +476,13 @@ class Ewelink extends utils.Adapter {
         reply(this.startSignIn(app));
       } else if (obj.command === "fetchDevices") {
         reply(await this.finishSignIn(app, text(message.address)));
+      } else if (obj.command === "addKey") {
+        reply(this.addKey(text(message.deviceId), text(message.deviceKey)));
       } else {
         reply({ error: `unknown command "${obj.command}"` });
       }
     } catch (error) {
-      this.log.warn(`eWeLink sign-in: ${error.message}`);
+      this.log.warn(`${obj.command === "addKey" ? "Device key" : "eWeLink sign-in"}: ${error.message}`);
       reply({ error: error.message });
     }
   }
@@ -541,6 +543,39 @@ class Ewelink extends utils.Adapter {
         appSecret: app.appSecret,
         redirectUrl: app.redirectUrl,
         signInAddress: "",
+        devices: rows,
+        deviceKeys: JSON.stringify(keys)
+      },
+      saveConfig: true,
+      result
+    };
+  }
+  /**
+   * Store a device key entered by hand (e.g. copied from another eWeLink integration),
+   * for users without a developer-centre app. Adds the device to the table if needed.
+   *
+   * @param deviceId - eWeLink device ID
+   * @param deviceKey - its device key
+   */
+  addKey(deviceId, deviceKey) {
+    var _a;
+    if (!deviceId || !deviceKey) {
+      throw new Error("enter the device ID and the device key");
+    }
+    const rows = [...(_a = this.config.devices) != null ? _a : []];
+    const keys = this.deviceKeys();
+    const known = rows.some((r) => (r.deviceId || "").trim() === deviceId);
+    if (!known) {
+      rows.push({ enabled: true, name: deviceId, host: "", port: import_diy.DIY_PORT, deviceId });
+    }
+    keys[deviceId] = deviceKey;
+    const result = `key for ${deviceId} saved${known ? "" : ", device added"}`;
+    this.log.info(`Device key entered by hand: ${result}`);
+    return {
+      native: {
+        ...this.config,
+        manualDeviceId: "",
+        manualDeviceKey: "",
         devices: rows,
         deviceKeys: JSON.stringify(keys)
       },

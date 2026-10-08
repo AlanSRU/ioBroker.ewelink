@@ -171,6 +171,54 @@
                     "md": 4,
                     "lg": 3,
                     "xl": 3
+                },
+                "manualKeyHint": {
+                    "type": "staticText",
+                    "text": "manualKeyHint",
+                    "newLine": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "xl": 12,
+                    "style": {
+                        "marginTop": 24
+                    }
+                },
+                "manualDeviceId": {
+                    "type": "text",
+                    "label": "Device ID",
+                    "newLine": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 4,
+                    "lg": 3,
+                    "xl": 3
+                },
+                "manualDeviceKey": {
+                    "type": "password",
+                    "label": "Device key",
+                    "repeat": false,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 4,
+                    "lg": 3,
+                    "xl": 3
+                },
+                "addKey": {
+                    "type": "sendTo",
+                    "label": "Save device key",
+                    "command": "addKey",
+                    "jsonData": "{\"deviceId\":\"${data.manualDeviceId}\",\"deviceKey\":\"${data.manualDeviceKey}\"}",
+                    "useNative": true,
+                    "variant": "contained",
+                    "showProcess": true,
+                    "timeout": 20000,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 4,
+                    "lg": 3,
+                    "xl": 3
                 }
             }
         }

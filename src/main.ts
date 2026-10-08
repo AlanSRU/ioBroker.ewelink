@@ -552,11 +552,15 @@ class Ewelink extends utils.Adapter {
                 reply(this.startSignIn(app));
             } else if (obj.command === 'fetchDevices') {
                 reply(await this.finishSignIn(app, text(message.address)));
+            } else if (obj.command === 'addKey') {
+                reply(this.addKey(text(message.deviceId), text(message.deviceKey)));
             } else {
                 reply({ error: `unknown command "${obj.command}"` });
             }
         } catch (error) {
-            this.log.warn(`eWeLink sign-in: ${(error as Error).message}`);
+            this.log.warn(
+                `${obj.command === 'addKey' ? 'Device key' : 'eWeLink sign-in'}: ${(error as Error).message}`,
+            );
             reply({ error: (error as Error).message });
         }
     }
@@ -619,6 +623,39 @@ class Ewelink extends utils.Adapter {
                 appSecret: app.appSecret,
                 redirectUrl: app.redirectUrl,
                 signInAddress: '',
+                devices: rows,
+                deviceKeys: JSON.stringify(keys),
+            },
+            saveConfig: true,
+            result,
+        };
+    }
+
+    /**
+     * Store a device key entered by hand (e.g. copied from another eWeLink integration),
+     * for users without a developer-centre app. Adds the device to the table if needed.
+     *
+     * @param deviceId - eWeLink device ID
+     * @param deviceKey - its device key
+     */
+    private addKey(deviceId: string, deviceKey: string): Record<string, unknown> {
+        if (!deviceId || !deviceKey) {
+            throw new Error('enter the device ID and the device key');
+        }
+        const rows = [...((this.config.devices ?? []) as unknown as DeviceConfig[])];
+        const keys = this.deviceKeys();
+        const known = rows.some(r => (r.deviceId || '').trim() === deviceId);
+        if (!known) {
+            rows.push({ enabled: true, name: deviceId, host: '', port: DIY_PORT, deviceId });
+        }
+        keys[deviceId] = deviceKey;
+        const result = `key for ${deviceId} saved${known ? '' : ', device added'}`;
+        this.log.info(`Device key entered by hand: ${result}`);
+        return {
+            native: {
+                ...this.config,
+                manualDeviceId: '',
+                manualDeviceKey: '',
                 devices: rows,
                 deviceKeys: JSON.stringify(keys),
             },

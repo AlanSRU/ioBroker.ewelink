@@ -17,5 +17,8 @@
     "eWeLink account": "易微联账户",
     "pollIntervalHelp": "询问每个设备的开关状态的频率（5-3600 秒）",
     "redirectUrlHelp": "必须与为应用程序注册的重定向 URL 完全相同",
-    "signInAddressHelp": "登录后浏览器显示的完整地址，包含code=和region="
+    "signInAddressHelp": "登录后浏览器显示的完整地址，包含code=和region=",
+    "manualKeyHint": "没有开发者账号？如果已经知道设备密钥（例如来自 Home Assistant 的 Sonoff LAN 集成），请在此输入设备 ID 和密钥，然后点击\"保存设备密钥\"。密钥将加密保存；尚未在设备表中的设备会被自动添加。",
+    "Device key": "设备密钥",
+    "Save device key": "保存设备密钥"
 }

@@ -17,5 +17,8 @@
     "eWeLink account": "eWeLink-account",
     "pollIntervalHelp": "Hoe vaak elk apparaat wordt gevraagd naar zijn schakelstatus (5-3600 s)",
     "redirectUrlHelp": "Moet exact de omleidings-URL zijn die voor de app is geregistreerd",
-    "signInAddressHelp": "Het volledige adres dat de browser toont na het inloggen, met code= en regio="
+    "signInAddressHelp": "Het volledige adres dat de browser toont na het inloggen, met code= en regio=",
+    "manualKeyHint": "Geen ontwikkelaarsaccount? Als je de sleutel van een apparaat al kent, bijvoorbeeld uit de Sonoff LAN-integratie van Home Assistant, vul hier de apparaat-ID en sleutel in en klik op \"Apparaatsleutel opslaan\". De sleutel wordt versleuteld opgeslagen; een apparaat dat nog niet in de tabel staat, wordt toegevoegd.",
+    "Device key": "Apparaatsleutel",
+    "Save device key": "Apparaatsleutel opslaan"
 }

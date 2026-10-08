@@ -17,5 +17,8 @@
     "eWeLink account": "account eWeLink",
     "pollIntervalHelp": "La frequenza con cui a ciascun dispositivo viene richiesto lo stato di commutazione (5-3600 s)",
     "redirectUrlHelp": "Deve essere esattamente l'URL di reindirizzamento registrato per l'app",
-    "signInAddressHelp": "L'indirizzo completo che il browser mostra dopo l'accesso, contenente code= e regione="
+    "signInAddressHelp": "L'indirizzo completo che il browser mostra dopo l'accesso, contenente code= e regione=",
+    "manualKeyHint": "Nessun account sviluppatore? Se conosci già la chiave di un dispositivo, ad esempio dall'integrazione Sonoff LAN di Home Assistant, inserisci qui ID e chiave e fai clic su \"Salva chiave dispositivo\". La chiave viene salvata cifrata; un dispositivo non ancora presente nella tabella viene aggiunto.",
+    "Device key": "Chiave dispositivo",
+    "Save device key": "Salva chiave dispositivo"
 }

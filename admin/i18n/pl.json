@@ -17,5 +17,8 @@
     "eWeLink account": "konto eWeLink",
     "pollIntervalHelp": "Jak często każde urządzenie jest pytane o stan przełączenia (5–3600 s)",
     "redirectUrlHelp": "Musi to być dokładnie adres URL przekierowania zarejestrowany dla aplikacji",
-    "signInAddressHelp": "Pełny adres, jaki przeglądarka wyświetla po zalogowaniu, zawierający kod= i region="
+    "signInAddressHelp": "Pełny adres, jaki przeglądarka wyświetla po zalogowaniu, zawierający kod= i region=",
+    "manualKeyHint": "Brak konta deweloperskiego? Jeśli znasz już klucz urządzenia, np. z integracji Sonoff LAN w Home Assistant, wpisz tutaj ID urządzenia i klucz, a następnie kliknij \"Zapisz klucz urządzenia\". Klucz jest przechowywany w postaci zaszyfrowanej; urządzenie, którego nie ma jeszcze w tabeli, zostanie dodane.",
+    "Device key": "Klucz urządzenia",
+    "Save device key": "Zapisz klucz urządzenia"
 }

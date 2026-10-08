@@ -17,5 +17,8 @@
     "eWeLink account": "Conta eWeLink",
     "pollIntervalHelp": "Com que frequência cada dispositivo é questionado sobre seu estado de comutação (5-3600 s)",
     "redirectUrlHelp": "Deve ser exatamente o URL de redirecionamento registrado para o aplicativo",
-    "signInAddressHelp": "O endereço completo que o navegador mostra após o login, contendo code= e região="
+    "signInAddressHelp": "O endereço completo que o navegador mostra após o login, contendo code= e região=",
+    "manualKeyHint": "Não tem conta de programador? Se já conhece a chave de um dispositivo, por exemplo da integração Sonoff LAN do Home Assistant, introduza aqui o ID e a chave e clique em \"Guardar chave do dispositivo\". A chave é guardada encriptada; um dispositivo que ainda não esteja na tabela é adicionado.",
+    "Device key": "Chave do dispositivo",
+    "Save device key": "Guardar chave do dispositivo"
 }

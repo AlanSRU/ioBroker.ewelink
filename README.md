@@ -34,8 +34,9 @@ Two kinds of device are supported:
 - The ioBroker host on the **same network (subnet)** as the switches: devices announce themselves
   and their state by mDNS, which does not cross routers. (DIY mode devices with a configured IP
   address can also be polled across subnets.)
-- For eWeLink LAN control: *LAN control* enabled for the device in the eWeLink app, and a free
-  developer account at the [eWeLink developer centre](https://dev.ewelink.cc/) (see below).
+- For eWeLink LAN control: *LAN control* enabled for the device in the eWeLink app, and either a
+  free developer account at the [eWeLink developer centre](https://dev.ewelink.cc/) or the device
+  keys from elsewhere (see below).
 
 ## Fetching your devices from eWeLink
 
@@ -54,6 +55,14 @@ take your eWeLink password. Instead:
 Single-channel switches of the account are added to the device table, and the keys of devices
 already in the table are updated. Repeat this when you add a device to your account.
 
+## Entering a device key by hand
+
+Without a developer account you can enter keys you already have, for example from the Sonoff LAN
+integration of Home Assistant: in tab **eWeLink account**, enter the **Device ID** and **Device key**
+and click **Save device key**. The key is stored encrypted like a fetched one, and a device that is
+not in the device table yet is added. A wrong key shows up as "cannot decrypt the device data" in
+the log. A device's key changes when it is re-paired in the eWeLink app.
+
 ## Configuration
 
 | Setting | Meaning |
@@ -61,6 +70,7 @@ already in the table are updated. Repeat this when you add a device to your acco
 | **Devices** | One row per switch: active, name, IP address, port (8081) and device ID. The name becomes the object-tree folder (`ewelink.0.<name>`). Devices fetched from eWeLink need only the device ID — the IP address is learned from their mDNS announcements and kept up to date when it changes. A DIY mode device needs its IP address; its device ID is optional. |
 | **Poll interval** | 5–3600 s (default 10 s). DIY mode devices are polled over HTTP at this interval. eWeLink LAN control devices push their state; at this interval the adapter asks them to announce themselves, and a device that stays silent for two intervals is marked unreachable. |
 | **App ID / App Secret / Redirect URL** | The developer-centre app used to fetch the device keys. |
+| **Device ID / Device key** | A device key entered by hand instead of fetched; cleared once saved. |
 
 Deactivating a row keeps the device's objects (and their history/alias settings); deleting the row
 removes them at the next start.
@@ -88,7 +98,7 @@ CoolKit Technologies). This adapter is not affiliated with or endorsed by them.
 -->
 
 ### **WORK IN PROGRESS**
-* (Alan Paris) initial release: single-channel switches in eWeLink LAN control mode (device keys fetched once via eWeLink sign-in) and DIY mode
+* (Alan Paris) initial release: single-channel switches in eWeLink LAN control mode (device keys fetched once via eWeLink sign-in, or entered by hand) and DIY mode
 
 ## License
 MIT License
