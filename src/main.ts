@@ -415,11 +415,37 @@ class Ewelink extends utils.Adapter {
         const now = Date.now();
         for (const d of this.devices.values()) {
             if (d.encrypted && now - (d.lastSeen || this.startedAt) >= this.pollInterval) {
-                void this.failed(d, 'no mDNS announcement — is the device online and on the same network?');
+                void this.probe(d);
             }
         }
         this.browser?.query();
         this.mdnsTimer = this.setTimeout(() => this.mdnsTick(), this.pollInterval);
+    }
+
+    /**
+     * An encrypted device stayed silent for an interval. Multicast is not retried on
+     * WiFi, so its reply is often just lost: ask the device over HTTP before counting
+     * a failure. The reply carries no state, only that the device is there.
+     *
+     * @param d - the device
+     */
+    private async probe(d: Device): Promise<void> {
+        const silent = 'no mDNS announcement — is the device online and on the same network?';
+        if (!d.target.host) {
+            await this.failed(d, silent);
+            return;
+        }
+        try {
+            await diyRequest(d.target, 'getState');
+        } catch (error) {
+            if (!this.stopped) {
+                await this.failed(d, `${silent} (HTTP: ${(error as Error).message})`);
+            }
+            return;
+        }
+        if (!this.stopped) {
+            await this.succeeded(d);
+        }
     }
 
     /**
