@@ -98,7 +98,7 @@ CoolKit Technologies). This adapter is not affiliated with or endorsed by them.
 -->
 
 ### **WORK IN PROGRESS**
-* (Alan Paris) initial release: single-channel switches in eWeLink LAN control mode (device keys fetched once via eWeLink sign-in, or entered by hand) and DIY mode
+* (Alan Paris) Initial release: single-channel switches in eWeLink LAN control mode (device keys fetched once via eWeLink sign-in, or entered by hand) and DIY mode
 
 ## License
 MIT License

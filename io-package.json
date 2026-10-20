@@ -3,18 +3,18 @@
         "name": "ewelink",
         "version": "0.0.1",
         "news": {
-            "0.0.1": {
-                "en": "initial release",
-                "de": "Erstveröffentlichung",
-                "ru": "Начальная версия",
-                "pt": "lançamento inicial",
-                "nl": "Eerste uitgave",
-                "fr": "Première version",
-                "it": "Versione iniziale",
-                "es": "Versión inicial",
-                "pl": "Pierwsze wydanie",
-                "uk": "Початкова версія",
-                "zh-cn": "首次出版"
+            "0.1.0": {
+                "en": "Initial release: single-channel switches in eWeLink LAN control mode (device keys fetched once via eWeLink sign-in, or entered by hand) and DIY mode",
+                "de": "Erste Version: Einkanal-Schalter im eWeLink-LAN-Steuerungsmodus (Geräteschlüssel einmalig über die eWeLink-Anmeldung abgerufen oder von Hand eingegeben) und im DIY-Modus",
+                "ru": "Первый выпуск: одноканальные выключатели в режиме управления eWeLink LAN (ключи устройств загружаются один раз через вход в eWeLink или вводятся вручную) и в режиме DIY",
+                "pt": "Primeira versão: interruptores de um canal no modo de controlo LAN eWeLink (chaves dos dispositivos obtidas uma vez através do início de sessão eWeLink ou introduzidas manualmente) e no modo DIY",
+                "nl": "Eerste versie: eenkanaalsschakelaars in de eWeLink LAN-besturingsmodus (apparaatsleutels eenmalig opgehaald via aanmelden bij eWeLink of handmatig ingevoerd) en in de DIY-modus",
+                "fr": "Première version : interrupteurs à un canal en mode de contrôle LAN eWeLink (clés des appareils récupérées une seule fois via la connexion eWeLink, ou saisies à la main) et en mode DIY",
+                "it": "Prima versione: interruttori a un canale in modalità di controllo LAN eWeLink (chiavi dei dispositivi ottenute una sola volta tramite l'accesso a eWeLink o inserite a mano) e in modalità DIY",
+                "es": "Primera versión: interruptores de un canal en modo de control LAN de eWeLink (claves de dispositivo obtenidas una sola vez mediante el inicio de sesión de eWeLink o introducidas a mano) y en modo DIY",
+                "pl": "Pierwsze wydanie: przełączniki jednokanałowe w trybie sterowania eWeLink LAN (klucze urządzeń pobierane jednorazowo przez logowanie do eWeLink lub wpisywane ręcznie) oraz w trybie DIY",
+                "uk": "Перший випуск: одноканальні вимикачі в режимі керування eWeLink LAN (ключі пристроїв отримуються один раз через вхід до eWeLink або вводяться вручну) та в режимі DIY",
+                "zh-cn": "首个版本：支持 eWeLink 局域网控制模式（设备密钥通过 eWeLink 登录一次性获取，或手动输入）和 DIY 模式下的单通道开关"
             }
         },
         "titleLang": {
