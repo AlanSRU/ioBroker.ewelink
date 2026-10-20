@@ -572,6 +572,9 @@ class Ewelink extends utils.Adapter {
       }
     }
     const notSupported = skipped.length ? `, not supported yet: ${skipped.join(", ")}` : "";
+    if (!added && !updated) {
+      throw new Error(`no supported device in the account (${cloudDevices.length} found${notSupported})`);
+    }
     const result = `${cloudDevices.length} device(s) in the account: ${added} added, ${updated} key(s) updated${notSupported}`;
     this.log.info(`eWeLink sign-in: ${result}`);
     return {
