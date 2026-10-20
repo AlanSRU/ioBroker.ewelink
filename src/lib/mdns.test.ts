@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import type { Packet } from 'dns-packet';
 import { parseResponse } from './mdns';
 
-const NAME = 'eWeLink_100118cdd1._ewelink._tcp.local';
-const SENDER = { address: '192.168.123.200' };
+const NAME = 'eWeLink_1000a1b2c3._ewelink._tcp.local';
+const SENDER = { address: '192.168.1.10' };
 
 describe('parseResponse', () => {
     it('reads an encrypted announcement with SRV and A records', () => {
@@ -16,7 +16,7 @@ describe('parseResponse', () => {
                     name: NAME,
                     data: [
                         Buffer.from('txtvers=1'),
-                        Buffer.from('id=100118cdd1'),
+                        Buffer.from('id=1000a1b2c3'),
                         Buffer.from('type=plug'),
                         Buffer.from('apivers=1'),
                         Buffer.from('seq=17'),
@@ -28,14 +28,14 @@ describe('parseResponse', () => {
                 },
             ],
             additionals: [
-                { type: 'SRV', name: NAME, data: { port: 8081, target: 'eWeLink_100118cdd1.local' } },
-                { type: 'A', name: 'eWeLink_100118cdd1.local', data: '192.168.123.127' },
+                { type: 'SRV', name: NAME, data: { port: 8081, target: 'eWeLink_1000a1b2c3.local' } },
+                { type: 'A', name: 'eWeLink_1000a1b2c3.local', data: '192.168.1.50' },
             ],
         };
         expect(parseResponse(packet, SENDER)).to.deep.equal([
             {
-                deviceId: '100118cdd1',
-                address: '192.168.123.127',
+                deviceId: '1000a1b2c3',
+                address: '192.168.1.50',
                 port: 8081,
                 seq: 17,
                 encrypted: true,
@@ -51,7 +51,7 @@ describe('parseResponse', () => {
             answers: [{ type: 'TXT', name: NAME, data: ['encrypt=false', 'data1={"switch":"on"}'] }],
         };
         const [a] = parseResponse(packet, SENDER);
-        expect(a).to.include({ deviceId: '100118cdd1', address: '192.168.123.200', encrypted: false });
+        expect(a).to.include({ deviceId: '1000a1b2c3', address: '192.168.1.10', encrypted: false });
         expect(a.data).to.equal('{"switch":"on"}');
         expect(a.seq).to.equal(undefined);
         expect(a.port).to.equal(undefined);
@@ -60,7 +60,7 @@ describe('parseResponse', () => {
     it('keeps "=" inside values', () => {
         const packet: Packet = {
             type: 'response',
-            answers: [{ type: 'TXT', name: NAME, data: ['id=100118cdd1', 'iv=abc==', 'data1=xyz='] }],
+            answers: [{ type: 'TXT', name: NAME, data: ['id=1000a1b2c3', 'iv=abc==', 'data1=xyz='] }],
         };
         expect(parseResponse(packet, SENDER)[0]).to.include({ iv: 'abc==', data: 'xyz=' });
     });

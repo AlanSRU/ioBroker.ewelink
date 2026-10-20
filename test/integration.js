@@ -39,13 +39,13 @@ tests.integration(path.join(__dirname, '..'), {
             before(async function () {
                 this.timeout(60000);
                 harness = getHarness();
-                sim = new DiySimulator({ deviceId: '100118cdd1', deviceKey: KEY });
+                sim = new DiySimulator({ deviceId: '1000a1b2c3', deviceKey: KEY });
                 await sim.listen();
                 await harness.changeAdapterConfig('ewelink', {
                     native: {
                         // no IP address: it is learned from the mDNS announcement
-                        devices: [{ enabled: true, name: 'Desk USB', host: '', port: 8081, deviceId: '100118cdd1' }],
-                        deviceKeys: JSON.stringify({ '100118cdd1': KEY }),
+                        devices: [{ enabled: true, name: 'Desk USB', host: '', port: 8081, deviceId: '1000a1b2c3' }],
+                        deviceKeys: JSON.stringify({ '1000a1b2c3': KEY }),
                         pollInterval: 5,
                     },
                 });
@@ -60,7 +60,7 @@ tests.integration(path.join(__dirname, '..'), {
                 this.timeout(20000);
                 expect(await waitFor('desk_usb.info.reachable', v => v === true)).to.equal(true);
                 expect(await waitFor('desk_usb.control.power', v => v === false)).to.equal(false);
-                expect((await getState('desk_usb.info.deviceId')).val).to.equal('100118cdd1');
+                expect((await getState('desk_usb.info.deviceId')).val).to.equal('1000a1b2c3');
             });
 
             it('switches with encrypted commands', async function () {
@@ -69,7 +69,7 @@ tests.integration(path.join(__dirname, '..'), {
                 await waitFor('desk_usb.control.power', v => v === true);
                 expect(sim.state.switch).to.equal('on');
                 const command = sim.requests.filter(r => r.path === '/zeroconf/switch').pop();
-                expect(command.body).to.include({ deviceid: '100118cdd1', encrypt: true });
+                expect(command.body).to.include({ deviceid: '1000a1b2c3', encrypt: true });
                 expect(command.body.decrypted).to.deep.equal({ switch: 'on' });
             });
 

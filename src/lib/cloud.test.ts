@@ -39,7 +39,7 @@ describe('toDevices', () => {
         const list = [
             {
                 itemType: 1,
-                itemData: { deviceid: '100118cdd1', name: 'Desk USB', devicekey: 'k1', params: { switch: 'off' } },
+                itemData: { deviceid: '1000a1b2c3', name: 'Desk USB', devicekey: 'k1', params: { switch: 'off' } },
             },
             {
                 itemType: 1,
@@ -59,7 +59,7 @@ describe('toDevices', () => {
             null,
         ];
         expect(toDevices(list)).to.deep.equal([
-            { deviceId: '100118cdd1', name: 'Desk USB', deviceKey: 'k1', singleSwitch: true },
+            { deviceId: '1000a1b2c3', name: 'Desk USB', deviceKey: 'k1', singleSwitch: true },
             { deviceId: '1000aaaaaa', name: '4CH', deviceKey: 'k2', singleSwitch: false },
             { deviceId: '1000bbbbbb', name: 'MICRO', deviceKey: 'k3', singleSwitch: true },
         ]);
