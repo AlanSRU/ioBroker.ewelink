@@ -96,8 +96,7 @@ CoolKit Technologies). This adapter is not affiliated with or endorsed by them.
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
-
-### **WORK IN PROGRESS**
+### 0.1.0 (2026-10-20)
 * (Alan Paris) Initial release: single-channel switches in eWeLink LAN control mode (device keys fetched once via eWeLink sign-in, or entered by hand) and DIY mode
 
 ## License

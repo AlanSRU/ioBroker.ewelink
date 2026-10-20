@@ -1,6 +1,6 @@
 {
   "name": "iobroker.ewelink",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Control Sonoff / eWeLink switches on the local network, in eWeLink LAN control mode or DIY mode.",
   "author": {
     "name": "Alan Paris",

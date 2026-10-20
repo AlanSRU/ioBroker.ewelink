@@ -1,137 +1,137 @@
 {
-    "common": {
-        "name": "ewelink",
-        "version": "0.0.1",
-        "news": {
-            "0.1.0": {
-                "en": "Initial release: single-channel switches in eWeLink LAN control mode (device keys fetched once via eWeLink sign-in, or entered by hand) and DIY mode",
-                "de": "Erste Version: Einkanal-Schalter im eWeLink-LAN-Steuerungsmodus (Geräteschlüssel einmalig über die eWeLink-Anmeldung abgerufen oder von Hand eingegeben) und im DIY-Modus",
-                "ru": "Первый выпуск: одноканальные выключатели в режиме управления eWeLink LAN (ключи устройств загружаются один раз через вход в eWeLink или вводятся вручную) и в режиме DIY",
-                "pt": "Primeira versão: interruptores de um canal no modo de controlo LAN eWeLink (chaves dos dispositivos obtidas uma vez através do início de sessão eWeLink ou introduzidas manualmente) e no modo DIY",
-                "nl": "Eerste versie: eenkanaalsschakelaars in de eWeLink LAN-besturingsmodus (apparaatsleutels eenmalig opgehaald via aanmelden bij eWeLink of handmatig ingevoerd) en in de DIY-modus",
-                "fr": "Première version : interrupteurs à un canal en mode de contrôle LAN eWeLink (clés des appareils récupérées une seule fois via la connexion eWeLink, ou saisies à la main) et en mode DIY",
-                "it": "Prima versione: interruttori a un canale in modalità di controllo LAN eWeLink (chiavi dei dispositivi ottenute una sola volta tramite l'accesso a eWeLink o inserite a mano) e in modalità DIY",
-                "es": "Primera versión: interruptores de un canal en modo de control LAN de eWeLink (claves de dispositivo obtenidas una sola vez mediante el inicio de sesión de eWeLink o introducidas a mano) y en modo DIY",
-                "pl": "Pierwsze wydanie: przełączniki jednokanałowe w trybie sterowania eWeLink LAN (klucze urządzeń pobierane jednorazowo przez logowanie do eWeLink lub wpisywane ręcznie) oraz w trybie DIY",
-                "uk": "Перший випуск: одноканальні вимикачі в режимі керування eWeLink LAN (ключі пристроїв отримуються один раз через вхід до eWeLink або вводяться вручну) та в режимі DIY",
-                "zh-cn": "首个版本：支持 eWeLink 局域网控制模式（设备密钥通过 eWeLink 登录一次性获取，或手动输入）和 DIY 模式下的单通道开关"
-            }
-        },
-        "titleLang": {
-            "en": "eWeLink LAN",
-            "de": "eWeLink LAN",
-            "ru": "eWeLink LAN",
-            "pt": "eWeLink LAN",
-            "nl": "eWeLink LAN",
-            "fr": "Réseau local eWeLink",
-            "it": "eWeLink LAN",
-            "es": "LAN eWeLink",
-            "pl": "eWeLink LAN",
-            "uk": "eWeLink LAN",
-            "zh-cn": "易微联局域网"
-        },
-        "desc": {
-            "en": "Control Sonoff / eWeLink switches on the local network, in eWeLink LAN control mode or DIY mode.",
-            "de": "Steuern Sie Sonoff / eWeLink-Schalter im lokalen Netzwerk, im eWeLink LAN-Steuerungsmodus oder im DIY-Modus.",
-            "ru": "Управляйте переключателями Sonoff/eWeLink по локальной сети, в режиме управления eWeLink LAN или режиме DIY.",
-            "pt": "Controle os interruptores Sonoff / eWeLink na rede local, no modo de controle LAN eWeLink ou no modo DIY.",
-            "nl": "Bedien Sonoff / eWeLink-schakelaars via het lokale netwerk, in de eWeLink LAN-besturingsmodus of de DIY-modus.",
-            "fr": "Contrôlez les commutateurs Sonoff / eWeLink sur le réseau local, en mode de contrôle eWeLink LAN ou en mode DIY.",
-            "it": "Controlla gli interruttori Sonoff / eWeLink sulla rete locale, in modalità di controllo LAN eWeLink o in modalità fai-da-te.",
-            "es": "Controle los interruptores Sonoff / eWeLink en la red local, en modo de control LAN eWeLink o en modo DIY.",
-            "pl": "Sterowanie przełącznikami Sonoff/eWeLink w sieci lokalnej, w trybie sterowania eWeLink LAN lub w trybie DIY.",
-            "uk": "Керування перемикачами Sonoff / eWeLink у локальній мережі, у режимі керування eWeLink LAN або в режимі DIY.",
-            "zh-cn": "在本地网络上控制 Sonoff / eWeLink 开关，支持 eWeLink LAN 控制模式和 DIY 模式。"
-        },
-        "authors": [
-            "Alan Paris <alan.paris@scottish.rugby>"
-        ],
-        "keywords": [
-            "sonoff",
-            "ewelink",
-            "diy",
-            "switch",
-            "relay"
-        ],
-        "licenseInformation": {
-            "type": "free",
-            "license": "MIT"
-        },
-        "platform": "Javascript/Node.js",
-        "icon": "ewelink.png",
-        "enabled": true,
-        "extIcon": "https://raw.githubusercontent.com/AlanSRU/ioBroker.ewelink/main/admin/ewelink.png",
-        "readme": "https://github.com/AlanSRU/ioBroker.ewelink/blob/main/README.md",
-        "loglevel": "info",
-        "tier": 3,
-        "mode": "daemon",
-        "type": "iot-systems",
-        "compact": true,
-        "connectionType": "local",
-        "dataSource": "poll",
-        "adminUI": {
-            "config": "json"
-        },
-        "dependencies": [
-            {
-                "js-controller": ">=6.0.11"
-            }
-        ],
-        "globalDependencies": [
-            {
-                "admin": ">=7.6.20"
-            }
-        ],
-        "supportedMessages": {
-            "custom": true
-        }
+  "common": {
+    "name": "ewelink",
+    "version": "0.1.0",
+    "news": {
+      "0.1.0": {
+        "en": "Initial release: single-channel switches in eWeLink LAN control mode (device keys fetched once via eWeLink sign-in, or entered by hand) and DIY mode",
+        "de": "Erste Version: Einkanal-Schalter im eWeLink-LAN-Steuerungsmodus (Geräteschlüssel einmalig über die eWeLink-Anmeldung abgerufen oder von Hand eingegeben) und im DIY-Modus",
+        "ru": "Первый выпуск: одноканальные выключатели в режиме управления eWeLink LAN (ключи устройств загружаются один раз через вход в eWeLink или вводятся вручную) и в режиме DIY",
+        "pt": "Primeira versão: interruptores de um canal no modo de controlo LAN eWeLink (chaves dos dispositivos obtidas uma vez através do início de sessão eWeLink ou introduzidas manualmente) e no modo DIY",
+        "nl": "Eerste versie: eenkanaalsschakelaars in de eWeLink LAN-besturingsmodus (apparaatsleutels eenmalig opgehaald via aanmelden bij eWeLink of handmatig ingevoerd) en in de DIY-modus",
+        "fr": "Première version : interrupteurs à un canal en mode de contrôle LAN eWeLink (clés des appareils récupérées une seule fois via la connexion eWeLink, ou saisies à la main) et en mode DIY",
+        "it": "Prima versione: interruttori a un canale in modalità di controllo LAN eWeLink (chiavi dei dispositivi ottenute una sola volta tramite l'accesso a eWeLink o inserite a mano) e in modalità DIY",
+        "es": "Primera versión: interruptores de un canal en modo de control LAN de eWeLink (claves de dispositivo obtenidas una sola vez mediante el inicio de sesión de eWeLink o introducidas a mano) y en modo DIY",
+        "pl": "Pierwsze wydanie: przełączniki jednokanałowe w trybie sterowania eWeLink LAN (klucze urządzeń pobierane jednorazowo przez logowanie do eWeLink lub wpisywane ręcznie) oraz w trybie DIY",
+        "uk": "Перший випуск: одноканальні вимикачі в режимі керування eWeLink LAN (ключі пристроїв отримуються один раз через вхід до eWeLink або вводяться вручну) та в режимі DIY",
+        "zh-cn": "首个版本：支持 eWeLink 局域网控制模式（设备密钥通过 eWeLink 登录一次性获取，或手动输入）和 DIY 模式下的单通道开关"
+      }
     },
-    "native": {
-        "devices": [],
-        "pollInterval": 10,
-        "appId": "",
-        "appSecret": "",
-        "redirectUrl": "http://127.0.0.1:8000/callback",
-        "signInAddress": "",
-        "deviceKeys": "",
-        "manualDeviceId": "",
-        "manualDeviceKey": ""
+    "titleLang": {
+      "en": "eWeLink LAN",
+      "de": "eWeLink LAN",
+      "ru": "eWeLink LAN",
+      "pt": "eWeLink LAN",
+      "nl": "eWeLink LAN",
+      "fr": "Réseau local eWeLink",
+      "it": "eWeLink LAN",
+      "es": "LAN eWeLink",
+      "pl": "eWeLink LAN",
+      "uk": "eWeLink LAN",
+      "zh-cn": "易微联局域网"
     },
-    "objects": [],
-    "instanceObjects": [
-        {
-            "_id": "info",
-            "type": "channel",
-            "common": {
-                "name": "Information"
-            },
-            "native": {}
-        },
-        {
-            "_id": "info.connection",
-            "type": "state",
-            "common": {
-                "role": "indicator.connected",
-                "name": "Device or service connected",
-                "type": "boolean",
-                "read": true,
-                "write": false,
-                "def": false
-            },
-            "native": {}
-        }
+    "desc": {
+      "en": "Control Sonoff / eWeLink switches on the local network, in eWeLink LAN control mode or DIY mode.",
+      "de": "Steuern Sie Sonoff / eWeLink-Schalter im lokalen Netzwerk, im eWeLink LAN-Steuerungsmodus oder im DIY-Modus.",
+      "ru": "Управляйте переключателями Sonoff/eWeLink по локальной сети, в режиме управления eWeLink LAN или режиме DIY.",
+      "pt": "Controle os interruptores Sonoff / eWeLink na rede local, no modo de controle LAN eWeLink ou no modo DIY.",
+      "nl": "Bedien Sonoff / eWeLink-schakelaars via het lokale netwerk, in de eWeLink LAN-besturingsmodus of de DIY-modus.",
+      "fr": "Contrôlez les commutateurs Sonoff / eWeLink sur le réseau local, en mode de contrôle eWeLink LAN ou en mode DIY.",
+      "it": "Controlla gli interruttori Sonoff / eWeLink sulla rete locale, in modalità di controllo LAN eWeLink o in modalità fai-da-te.",
+      "es": "Controle los interruptores Sonoff / eWeLink en la red local, en modo de control LAN eWeLink o en modo DIY.",
+      "pl": "Sterowanie przełącznikami Sonoff/eWeLink w sieci lokalnej, w trybie sterowania eWeLink LAN lub w trybie DIY.",
+      "uk": "Керування перемикачами Sonoff / eWeLink у локальній мережі, у режимі керування eWeLink LAN або в режимі DIY.",
+      "zh-cn": "在本地网络上控制 Sonoff / eWeLink 开关，支持 eWeLink LAN 控制模式和 DIY 模式。"
+    },
+    "authors": [
+      "Alan Paris <alan.paris@scottish.rugby>"
     ],
-    "protectedNative": [
-        "appId",
-        "appSecret",
-        "signInAddress",
-        "deviceKeys",
-        "manualDeviceKey"
+    "keywords": [
+      "sonoff",
+      "ewelink",
+      "diy",
+      "switch",
+      "relay"
     ],
-    "encryptedNative": [
-        "appSecret",
-        "signInAddress",
-        "deviceKeys",
-        "manualDeviceKey"
-    ]
+    "licenseInformation": {
+      "type": "free",
+      "license": "MIT"
+    },
+    "platform": "Javascript/Node.js",
+    "icon": "ewelink.png",
+    "enabled": true,
+    "extIcon": "https://raw.githubusercontent.com/AlanSRU/ioBroker.ewelink/main/admin/ewelink.png",
+    "readme": "https://github.com/AlanSRU/ioBroker.ewelink/blob/main/README.md",
+    "loglevel": "info",
+    "tier": 3,
+    "mode": "daemon",
+    "type": "iot-systems",
+    "compact": true,
+    "connectionType": "local",
+    "dataSource": "poll",
+    "adminUI": {
+      "config": "json"
+    },
+    "dependencies": [
+      {
+        "js-controller": ">=6.0.11"
+      }
+    ],
+    "globalDependencies": [
+      {
+        "admin": ">=7.6.20"
+      }
+    ],
+    "supportedMessages": {
+      "custom": true
+    }
+  },
+  "native": {
+    "devices": [],
+    "pollInterval": 10,
+    "appId": "",
+    "appSecret": "",
+    "redirectUrl": "http://127.0.0.1:8000/callback",
+    "signInAddress": "",
+    "deviceKeys": "",
+    "manualDeviceId": "",
+    "manualDeviceKey": ""
+  },
+  "objects": [],
+  "instanceObjects": [
+    {
+      "_id": "info",
+      "type": "channel",
+      "common": {
+        "name": "Information"
+      },
+      "native": {}
+    },
+    {
+      "_id": "info.connection",
+      "type": "state",
+      "common": {
+        "role": "indicator.connected",
+        "name": "Device or service connected",
+        "type": "boolean",
+        "read": true,
+        "write": false,
+        "def": false
+      },
+      "native": {}
+    }
+  ],
+  "protectedNative": [
+    "appId",
+    "appSecret",
+    "signInAddress",
+    "deviceKeys",
+    "manualDeviceKey"
+  ],
+  "encryptedNative": [
+    "appSecret",
+    "signInAddress",
+    "deviceKeys",
+    "manualDeviceKey"
+  ]
 }
