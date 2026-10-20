@@ -17,6 +17,10 @@ Thumbs.db
 admin/i18n/flat.txt
 admin/i18n/*/flat.txt
 
+# local secrets (dot-directories such as .proto/ are already ignored above)
+.env
+.env.*
+
 # local-only dev notes
 CLAUDE.md
 
