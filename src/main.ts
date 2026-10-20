@@ -28,6 +28,9 @@ const REQUEST_TIMEOUT_MS = 3000;
 /** Consecutive failed polls (or silent intervals) before a device counts as unreachable. */
 const OFFLINE_AFTER = 2;
 
+/** Silent mDNS intervals the HTTP probe may bridge; beyond that multicast is not getting through. */
+const PROBE_BRIDGES = 5;
+
 /** Successful polls in a row after which a repeated poll error is logged as a warning again. */
 const STABLE_POLLS = 10;
 
@@ -259,7 +262,7 @@ class Ewelink extends utils.Adapter {
             ['info.firmware', { name: 'Firmware version', type: 'string', role: 'info.firmware', def: '' }],
             ['info.deviceId', { name: 'eWeLink device ID', type: 'string', role: 'text', def: '' }],
             // no def: 0 dBm would read as a real (perfect) signal before the first poll
-            ['info.signalStrength', { name: 'WiFi signal strength', type: 'number', role: 'value', unit: 'dBm' }],
+            ['info.signalStrength', { name: 'WiFi signal strength', type: 'number', role: 'value.rssi', unit: 'dBm' }],
             ['control.power', { name: 'Power', type: 'boolean', role: 'switch.power', write: true, def: false }],
         ];
         for (const [id, common] of states) {
@@ -425,13 +428,14 @@ class Ewelink extends utils.Adapter {
     /**
      * An encrypted device stayed silent for an interval. Multicast is not retried on
      * WiFi, so its reply is often just lost: ask the device over HTTP before counting
-     * a failure. The reply carries no state, only that the device is there.
+     * a failure. The reply carries no state, only that the device is there, so the
+     * probe bridges a few lost replies but not a device whose mDNS never arrives.
      *
      * @param d - the device
      */
     private async probe(d: Device): Promise<void> {
         const silent = 'no mDNS announcement — is the device online and on the same network?';
-        if (!d.target.host) {
+        if (!d.target.host || Date.now() - (d.lastSeen || this.startedAt) > PROBE_BRIDGES * this.pollInterval) {
             await this.failed(d, silent);
             return;
         }
@@ -577,9 +581,9 @@ class Ewelink extends utils.Adapter {
             if (obj.command === 'signIn') {
                 reply(this.startSignIn(app));
             } else if (obj.command === 'fetchDevices') {
-                reply(await this.finishSignIn(app, text(message.address)));
+                reply(await this.finishSignIn(app, text(message.address), this.formRows(message.devices)));
             } else if (obj.command === 'addKey') {
-                reply(this.addKey(text(message.deviceId), text(message.deviceKey)));
+                reply(this.addKey(text(message.deviceId), text(message.deviceKey), this.formRows(message.devices)));
             } else {
                 reply({ error: `unknown command "${obj.command}"` });
             }
@@ -589,6 +593,16 @@ class Ewelink extends utils.Adapter {
             );
             reply({ error: (error as Error).message });
         }
+    }
+
+    /**
+     * The device table as currently shown in the form, unsaved edits included, so the
+     * reply does not overwrite them; the saved table if the form sent none.
+     *
+     * @param rows - the devices sent by the admin UI
+     */
+    private formRows(rows: unknown): DeviceConfig[] {
+        return [...((Array.isArray(rows) ? rows : (this.config.devices ?? [])) as DeviceConfig[])];
     }
 
     /**
@@ -612,8 +626,9 @@ class Ewelink extends utils.Adapter {
      *
      * @param app - the developer-centre app from the form
      * @param address - the pasted redirect address
+     * @param rows - the device table from the form
      */
-    private async finishSignIn(app: CloudApp, address: string): Promise<Record<string, unknown>> {
+    private async finishSignIn(app: CloudApp, address: string, rows: DeviceConfig[]): Promise<Record<string, unknown>> {
         const redirect = parseRedirect(address);
         if (!this.signIn || redirect.state !== this.signIn.state || Date.now() > this.signIn.expires) {
             throw new Error('this address does not belong to the current sign-in — click "Sign in" again');
@@ -621,7 +636,6 @@ class Ewelink extends utils.Adapter {
         this.signIn = undefined;
         const cloudDevices = await fetchDevices(app, redirect);
 
-        const rows = [...((this.config.devices ?? []) as unknown as DeviceConfig[])];
         const keys = this.deviceKeys();
         let added = 0;
         let updated = 0;
@@ -643,11 +657,8 @@ class Ewelink extends utils.Adapter {
         const result = `${cloudDevices.length} device(s) in the account: ${added} added, ${updated} key(s) updated${notSupported}`;
         this.log.info(`eWeLink sign-in: ${result}`);
         return {
+            // only the changed fields: admin writes each returned key into the form
             native: {
-                ...this.config,
-                appId: app.appId,
-                appSecret: app.appSecret,
-                redirectUrl: app.redirectUrl,
                 signInAddress: '',
                 devices: rows,
                 deviceKeys: JSON.stringify(keys),
@@ -663,12 +674,12 @@ class Ewelink extends utils.Adapter {
      *
      * @param deviceId - eWeLink device ID
      * @param deviceKey - its device key
+     * @param rows - the device table from the form
      */
-    private addKey(deviceId: string, deviceKey: string): Record<string, unknown> {
+    private addKey(deviceId: string, deviceKey: string, rows: DeviceConfig[]): Record<string, unknown> {
         if (!deviceId || !deviceKey) {
             throw new Error('enter the device ID and the device key');
         }
-        const rows = [...((this.config.devices ?? []) as unknown as DeviceConfig[])];
         const keys = this.deviceKeys();
         const known = rows.some(r => (r.deviceId || '').trim() === deviceId);
         if (!known) {
@@ -679,7 +690,6 @@ class Ewelink extends utils.Adapter {
         this.log.info(`Device key entered by hand: ${result}`);
         return {
             native: {
-                ...this.config,
                 manualDeviceId: '',
                 manualDeviceKey: '',
                 devices: rows,

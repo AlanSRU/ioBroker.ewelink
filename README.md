@@ -68,7 +68,7 @@ the log. A device's key changes when it is re-paired in the eWeLink app.
 | Setting | Meaning |
 |---|---|
 | **Devices** | One row per switch: active, name, IP address, port (8081) and device ID. The name becomes the object-tree folder (`ewelink.0.<name>`). Devices fetched from eWeLink need only the device ID — the IP address is learned from their mDNS announcements and kept up to date when it changes. A DIY mode device needs its IP address; its device ID is optional. |
-| **Poll interval** | 5–3600 s (default 10 s). DIY mode devices are polled over HTTP at this interval. eWeLink LAN control devices push their state; at this interval the adapter asks them to announce themselves, and a device that stays silent for two intervals is marked unreachable. |
+| **Poll interval** | 5–3600 s (default 10 s). DIY mode devices are polled over HTTP at this interval. eWeLink LAN control devices push their state; at this interval the adapter asks them to announce themselves. A device that misses an announcement is asked over HTTP instead, since WiFi drops the odd multicast packet; it is marked unreachable when that fails twice, or when no announcement arrives for more than five intervals (state changes made in the app or at the device would then go unseen). |
 | **App ID / App Secret / Redirect URL** | The developer-centre app used to fetch the device keys. |
 | **Device ID / Device key** | A device key entered by hand instead of fetched; cleared once saved. |
 

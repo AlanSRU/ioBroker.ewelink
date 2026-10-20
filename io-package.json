@@ -35,13 +35,13 @@
             "de": "Steuern Sie Sonoff / eWeLink-Schalter im lokalen Netzwerk, im eWeLink LAN-Steuerungsmodus oder im DIY-Modus.",
             "ru": "Управляйте переключателями Sonoff/eWeLink по локальной сети, в режиме управления eWeLink LAN или режиме DIY.",
             "pt": "Controle os interruptores Sonoff / eWeLink na rede local, no modo de controle LAN eWeLink ou no modo DIY.",
-            "nl": "Bediening Sonoff / eWeLink schakelt het lokale netwerk in, in eWeLink LAN-besturingsmodus of DIY-modus.",
+            "nl": "Bedien Sonoff / eWeLink-schakelaars via het lokale netwerk, in de eWeLink LAN-besturingsmodus of de DIY-modus.",
             "fr": "Contrôlez les commutateurs Sonoff / eWeLink sur le réseau local, en mode de contrôle eWeLink LAN ou en mode DIY.",
             "it": "Controlla gli interruttori Sonoff / eWeLink sulla rete locale, in modalità di controllo LAN eWeLink o in modalità fai-da-te.",
             "es": "Controle los interruptores Sonoff / eWeLink en la red local, en modo de control LAN eWeLink o en modo DIY.",
             "pl": "Sterowanie przełącznikami Sonoff/eWeLink w sieci lokalnej, w trybie sterowania eWeLink LAN lub w trybie DIY.",
-            "uk": "Управління Sonoff / eWeLink вмикає локальну мережу в режимі керування eWeLink LAN або режимі DIY.",
-            "zh-cn": "在eWeLink LAN控制模式或DIY模式下控制本地网络上的Sonoff / eWeLink交换机。"
+            "uk": "Керування перемикачами Sonoff / eWeLink у локальній мережі, у режимі керування eWeLink LAN або в режимі DIY.",
+            "zh-cn": "在本地网络上控制 Sonoff / eWeLink 开关，支持 eWeLink LAN 控制模式和 DIY 模式。"
         },
         "authors": [
             "Alan Paris <alan.paris@scottish.rugby>"

@@ -11,7 +11,7 @@
     "Poll interval (s)": "Poll-interval (s)",
     "Port": "Poort",
     "Redirect URL": "Omleidings-URL",
-    "Sign in with eWeLink": "Meld u aan met eWeLink",
+    "Sign in with eWeLink": "Aanmelden met eWeLink",
     "accountHint": "Schakelaars in de normale eWeLink LAN-besturingsmodus hebben een apparaatsleutel nodig, die alleen de eWeLink-cloud kent. Om de sleutels eenmalig op te halen: maak een app in het eWeLink-ontwikkelaarscentrum (dev.ewelink.cc) met de onderstaande omleidings-URL, voer de app-ID en het app-geheim in, klik op \"Aanmelden met eWeLink\" en log in met uw eWeLink-account. De browser opent vervolgens de redirect-URL, die mogelijk een foutpagina toont: kopieer het volledige adres uit de adresbalk naar het onderstaande veld en klik binnen enkele minuten op \"Apparaten ophalen\". De adapter bestuurt de switches alleen via het lokale netwerk; het blijft niet verbonden met de cloud.",
     "devicesHint": "Eén rij per Sonoff-schakelaar. De naam wordt de objectboommap (ewelink.0.<naam>.control.power). Apparaten die uit uw eWeLink-account worden opgehaald, hebben alleen hun apparaat-ID nodig: hun IP-adres wordt geleerd uit hun netwerkaankondigingen en hun sleutel wordt gecodeerd opgeslagen. Voor een schakelaar in doe-het-zelf-modus voert u het IP-adres in; de apparaat-ID is optioneel.",
     "eWeLink account": "eWeLink-account",
